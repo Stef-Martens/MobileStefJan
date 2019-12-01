@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/container"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:paddingTop="?attr/actionBarSize">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="?attr/dialogCornerRadius">
 
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -13,17 +13,15 @@ android:paddingTop="?attr/actionBarSize">
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_navigation" />
 
-<com.google.android.material.bottomnavigation.BottomNavigationView
-    android:id="@+id/bottom_navigation"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="0dp"
-    android:layout_marginEnd="0dp"
-    android:background="?android:attr/windowBackground"
-    android:layout_alignParentBottom="true"
-    app:menu="@menu/bottom_nav_menu"/>
-
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_nav_menu" />
 
 
 </RelativeLayout>
