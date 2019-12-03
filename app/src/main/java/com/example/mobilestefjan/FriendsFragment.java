@@ -1,13 +1,17 @@
 package com.example.mobilestefjan;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -22,7 +26,6 @@ public class FriendsFragment extends Fragment {
     ArrayAdapter<String> adapter;
     Button bt;
     EditText et;
-    String[] data={"yeet", "huts", "nau"};
 
     public FriendsFragment(){
         // moet een lege constructor hebben
@@ -39,7 +42,9 @@ public class FriendsFragment extends Fragment {
         arrayList=new ArrayList<>();
         adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayList);
         lv.setAdapter(adapter);
+        //lv.setSelector(positie);
         onVriendToevoegen();
+        vriendVerwijderen();
         return  view;
     }
 
@@ -53,4 +58,33 @@ public class FriendsFragment extends Fragment {
             }
         });
     }
+
+
+    public void vriendVerwijderen(){
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick (AdapterView<?> parent,View v, int positie, long id) {
+
+
+                final int which_item=positie;
+
+                new AlertDialog.Builder(getActivity())
+                        .setIcon(android.R.drawable.ic_delete)
+                        .setTitle("Are you sure?")
+                        .setMessage("Do you want to delete this item?")
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                arrayList.remove(which_item);
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("no", null)
+                        .show();
+
+                return true;
+            }
+        });
+    }
+
 }
