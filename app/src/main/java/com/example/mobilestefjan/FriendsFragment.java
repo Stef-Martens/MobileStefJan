@@ -24,8 +24,12 @@ public class FriendsFragment extends Fragment {
     ListView lv;
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
-    Button bt;
-    EditText et;
+    Button btNaam;
+    EditText etNaam;
+
+    ListView lvBedrag;
+    ArrayList<String> arrayListBedrag;
+    ArrayAdapter<String> adapterBedrag;
 
     public FriendsFragment(){
         // moet een lege constructor hebben
@@ -36,25 +40,30 @@ public class FriendsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_friends, container, false);
-        bt=view.findViewById(R.id.VriendToevoegen);
-        et=view.findViewById(R.id.txtNaam);
+        btNaam=view.findViewById(R.id.VriendToevoegen);
+        etNaam=view.findViewById(R.id.txtNaam);
         lv=view.findViewById(R.id.listFriends);
+        lvBedrag=view.findViewById(R.id.listFriendsBedrag);
         arrayList=new ArrayList<>();
+        arrayListBedrag=new ArrayList<>();
         adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayList);
+        adapterBedrag=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayListBedrag);
         lv.setAdapter(adapter);
-        //lv.setSelector(positie);
+        lvBedrag.setAdapter(adapterBedrag);
         onVriendToevoegen();
         vriendVerwijderen();
         return  view;
     }
 
     public void onVriendToevoegen(){
-        bt.setOnClickListener(new View.OnClickListener() {
+        btNaam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String result=et.getText().toString();
+                String result=etNaam.getText().toString();
                 arrayList.add(result);
+                arrayListBedrag.add("+ 0.00");
                 adapter.notifyDataSetChanged();
+                adapterBedrag.notifyDataSetChanged();
             }
         });
     }
@@ -71,12 +80,15 @@ public class FriendsFragment extends Fragment {
                 new AlertDialog.Builder(getActivity())
                         .setIcon(android.R.drawable.ic_delete)
                         .setTitle("Are you sure?")
-                        .setMessage("Do you want to delete this item?")
+                        //.setMessage("Do you want to delete this item?")
+                        .setMessage("Do you want to delete "+arrayList.get(which_item)+"?")
                         .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 arrayList.remove(which_item);
+                                arrayListBedrag.remove(which_item);
                                 adapter.notifyDataSetChanged();
+                                adapterBedrag.notifyDataSetChanged();
                             }
                         })
                         .setNegativeButton("no", null)
