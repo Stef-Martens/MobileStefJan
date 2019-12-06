@@ -20,6 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.io.ByteArrayOutputStream;
+
 public class TransactieFragment extends Fragment {
 
     ImageView imageView;
@@ -30,6 +32,9 @@ public class TransactieFragment extends Fragment {
     Button btnAnnuleren;
     Button btnOpslaan;
     DatabankTransacties myDb;
+    Bitmap bitmap;
+    ByteArrayOutputStream bos;
+    byte[] bArray;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -45,8 +50,6 @@ public class TransactieFragment extends Fragment {
         etDatum=view.findViewById(R.id.txtDatum);
         btnAnnuleren=view.findViewById(R.id.btnAnnuleren);
         btnOpslaan=view.findViewById(R.id.btnOpslaan);
-
-
 
 
         CameraOpenen();
@@ -70,10 +73,14 @@ public class TransactieFragment extends Fragment {
     }
 
 
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+        bitmap = (Bitmap)data.getExtras().get("data");
         imageView.setImageBitmap(bitmap);
+        bos= new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+        bArray= bos.toByteArray();
     }
 
     public  void Annuleren() {
@@ -93,7 +100,7 @@ public class TransactieFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         String bedrag= etBedrag.getText().toString();
-                        myDb.insertData(Integer.parseInt(bedrag),etDatum.getText().toString(),etOmschrijving.getText().toString());
+                        myDb.insertData(Integer.parseInt(bedrag),etDatum.getText().toString(),etOmschrijving.getText().toString(),bArray);
                         replaceFragment(new HomeFragment());
                     }
                 }
@@ -106,7 +113,5 @@ public class TransactieFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
-
 
     }
