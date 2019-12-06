@@ -101,10 +101,10 @@ public class FriendsFragment extends Fragment {
     public void VorigeDataToevoegen(){
 
         Cursor res = myDb.getAllData();
-        if (res.getCount() == 0) {
-            Toast.makeText(getActivity(),"yeet",Toast.LENGTH_LONG).show();
-            //return ;
-        }
+//        if (res.getCount() == 0) {
+//            Toast.makeText(getActivity(),"yeet",Toast.LENGTH_LONG).show();
+//            //return ;
+//        }
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()) {
 

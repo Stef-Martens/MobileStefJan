@@ -39,6 +39,7 @@
         <!--Rij 1-->
         <!--Column 1-->
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnLenen"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -58,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageButton
+                <androidx.appcompat.widget.AppCompatImageView
                     android:src="@drawable/lenen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,6 +81,7 @@
 
         <!--Column 2-->
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnBetalen"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -99,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageButton
+                <ImageView
                     android:src="@drawable/betalen"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
@@ -124,6 +126,7 @@
         <!--Rij 2-->
         <!--Column 1-->
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnUitlenen"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -142,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageButton
+                <ImageView
                     android:src="@drawable/uitlenen"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
@@ -164,6 +167,7 @@
 
         <!--Column 2-->
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnOntvangen"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -182,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageButton
+                <androidx.appcompat.widget.AppCompatImageView
                     android:src="@drawable/ontvangen"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
