@@ -130,16 +130,20 @@ public class FriendsFragment extends Fragment {
 
                 final int which_item=positie;
 
+                myDb.getWritableDatabase();
+                final Cursor res = (Cursor) myDb.getAllData();
+                res.moveToPosition(which_item);
+
                 new AlertDialog.Builder(getActivity())
                         .setIcon(android.R.drawable.ic_delete)
                         .setTitle("Are you sure?")
                         //.setMessage("Do you want to delete this item?")
-                        .setMessage("Do you want to delete "+arrayList.get(which_item)+"?")
+                        .setMessage("Do you want to delete "+res.getString(2)+"?")
                         .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String verw= Integer.toString(which_item);
-                                myDb.deleteData(verw);
+                                //String verw= Integer.toString(which_item);
+                                myDb.deleteData(res.getString(0));
                                 arrayList.remove(which_item);
                                 adapter.notifyDataSetChanged();
                             }
