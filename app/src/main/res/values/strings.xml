@@ -2,10 +2,11 @@
     <string name="app_name">MobileStefJan</string>
     <string name="action_settings">Settings</string>
     <string name="Saldo">(hier komt saldo)</string>
-    <string name="ontvangen">Ontvangen</string>
-    <string name="betaling">Betaling</string>
-    <string name="lenen">Lenen</string>
-    <string name="uitlenen">Uitlenen</string>
     <string name="vriend_verwijderen">Vriend Verwijderen</string>
     <string name="vriend_toevoegen">Vriend toevoegen</string>
+    <string name="ontvangen">INNEN</string>
+    <string name="uitlenen">UITLENEN</string>
+    <string name="foto">foto</string>
+    <string name="betalen">BETALEN</string>
+    <string name="lenen">LENEN</string>
 </resources>
