@@ -2,7 +2,9 @@ package com.example.mobilestefjan;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +26,11 @@ public class FriendsFragment extends Fragment {
     ListView lv;
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
-    Button btNaam;
-    EditText etNaam;
+    Button bt;
+    EditText etAchternaam;
+    EditText etVoornaam;
+    DatabankVrienden myDb;
 
-    ListView lvBedrag;
-    ArrayList<String> arrayListBedrag;
-    ArrayAdapter<String> adapterBedrag;
 
     public FriendsFragment(){
         // moet een lege constructor hebben
@@ -39,33 +40,85 @@ public class FriendsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
+
         View view= inflater.inflate(R.layout.fragment_friends, container, false);
-        btNaam=view.findViewById(R.id.VriendToevoegen);
-        etNaam=view.findViewById(R.id.txtNaam);
+        bt=view.findViewById(R.id.VriendToevoegen);
+        etAchternaam=view.findViewById(R.id.txtAchternaamaam);
+        etVoornaam=view.findViewById(R.id.txtVoornaam);
         lv=view.findViewById(R.id.listFriends);
-        lvBedrag=view.findViewById(R.id.listFriendsBedrag);
         arrayList=new ArrayList<>();
-        arrayListBedrag=new ArrayList<>();
         adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayList);
-        adapterBedrag=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayListBedrag);
         lv.setAdapter(adapter);
-        lvBedrag.setAdapter(adapterBedrag);
-        onVriendToevoegen();
+        myDb=new DatabankVrienden(getActivity());
+        VorigeDataToevoegen();
+        AddData();
+        //onVriendToevoegen();
         vriendVerwijderen();
         return  view;
     }
 
+
+
+
+    public  void AddData() {
+        bt.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String geld="0";
+                        boolean isInserted = myDb.insertData(etAchternaam.getText().toString(),
+                                etVoornaam.getText().toString(),
+                                 geld);
+                        if(isInserted == true)
+                            Toast.makeText(getActivity(),"Data Inserted",Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getActivity(),"Data not Inserted",Toast.LENGTH_LONG).show();
+
+                        String VolLijn=etAchternaam.getText().toString()+" "+etVoornaam.getText().toString()+"            "+geld;
+                        arrayList.add(VolLijn);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+        );
+    }
+
+
+
     public void onVriendToevoegen(){
-        btNaam.setOnClickListener(new View.OnClickListener() {
+        bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String result=etNaam.getText().toString();
-                arrayList.add(result);
-                arrayListBedrag.add("+ 0.00");
+                String achternaam=etAchternaam.getText().toString();
+                String voornaam=etVoornaam.getText().toString();
+                String VolledigeNaam=voornaam+" "+achternaam;
+                arrayList.add(VolledigeNaam);
                 adapter.notifyDataSetChanged();
-                adapterBedrag.notifyDataSetChanged();
             }
+
         });
+    }
+
+    public void VorigeDataToevoegen(){
+
+        Cursor res = myDb.getAllData();
+        if (res.getCount() == 0) {
+            Toast.makeText(getActivity(),"yeet",Toast.LENGTH_LONG).show();
+            //return ;
+        }
+        StringBuffer buffer = new StringBuffer();
+        while (res.moveToNext()) {
+
+            String VolLijn=res.getString(2)+" "+res.getString(1)+"            "+res.getString(3);
+            arrayList.add(VolLijn);
+            adapter.notifyDataSetChanged();
+//            buffer.append("Id :" + res.getString(0) + "\n");
+//            buffer.append("Name :" + res.getString(1) + "\n");
+//            buffer.append("Surname :" + res.getString(2) + "\n");
+//            buffer.append("Marks :" + res.getString(3) + "\n\n");
+        }
+
+        // Show all data
+//        showMessage("Data", buffer.toString());
     }
 
 
@@ -85,10 +138,10 @@ public class FriendsFragment extends Fragment {
                         .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                String verw= Integer.toString(which_item);
+                                myDb.deleteData(verw);
                                 arrayList.remove(which_item);
-                                arrayListBedrag.remove(which_item);
                                 adapter.notifyDataSetChanged();
-                                adapterBedrag.notifyDataSetChanged();
                             }
                         })
                         .setNegativeButton("no", null)

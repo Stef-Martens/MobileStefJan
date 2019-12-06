@@ -6,4 +6,6 @@
     <string name="betaling">Betaling</string>
     <string name="lenen">Lenen</string>
     <string name="uitlenen">Uitlenen</string>
+    <string name="vriend_verwijderen">Vriend Verwijderen</string>
+    <string name="vriend_toevoegen">Vriend toevoegen</string>
 </resources>
