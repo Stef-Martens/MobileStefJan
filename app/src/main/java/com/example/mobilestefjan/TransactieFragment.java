@@ -92,7 +92,8 @@ public class TransactieFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        String bedrag= etBedrag.getText().toString();
+                        myDb.insertData(Integer.parseInt(bedrag),etDatum.getText().toString(),etOmschrijving.getText().toString());
                         replaceFragment(new HomeFragment());
                     }
                 }
