@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
                             //selectedFragment = new HomeFragment();
-                            selectedFragment = new TransactieFragment();
+                            //selectedFragment = new TransactieFragment();
+                            selectedFragment = new LenenFragment();
                             break;
                         case R.id.navigation_friends:
                             selectedFragment = new FriendsFragment();
