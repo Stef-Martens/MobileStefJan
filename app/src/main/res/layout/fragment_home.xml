@@ -39,6 +39,7 @@
         <!--Rij 1-->
         <!--Column 1-->
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnLenen"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -58,14 +59,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageButton
-                    android:id="@+id/lenen"
+                <androidx.appcompat.widget.AppCompatImageView
                     android:src="@drawable/lenen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:contentDescription="@string/foto"
-                    android:background="@android:color/white" />
+                    android:background="@android:color/white"/>
 
                 <TextView
                     android:text="@string/lenen"
@@ -81,6 +81,7 @@
 
         <!--Column 2-->
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnBetalen"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -100,13 +101,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageButton
-                    android:id="@+id/betalen"
+                <ImageView
                     android:src="@drawable/betalen"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/foto" />
+                    android:contentDescription="@string/foto"
+                    android:background="@android:color/white"/>
 
                 <TextView
                     android:text="@string/betalen"
@@ -125,6 +126,7 @@
         <!--Rij 2-->
         <!--Column 1-->
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnUitlenen"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -143,14 +145,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageButton
-                    android:id="@+id/uitlenen"
+                <ImageView
                     android:src="@drawable/uitlenen"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/foto"
-                    android:background="@android:color/white" />
+                    android:background="@android:color/white"/>
 
                 <TextView
                     android:text="@string/uitlenen"
@@ -166,6 +167,7 @@
 
         <!--Column 2-->
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnOntvangen"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -184,14 +186,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageButton
-                    android:id="@+id/ontvangen"
+                <androidx.appcompat.widget.AppCompatImageView
                     android:src="@drawable/ontvangen"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/foto"
-                    android:background="@android:color/white" />
+                    android:background="@android:color/white"/>
 
                 <TextView
                     android:text="@string/ontvangen"

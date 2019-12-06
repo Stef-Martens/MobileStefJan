@@ -92,14 +92,14 @@ public class HistoryFragment extends Fragment {
 
     public  void AddData() {
         Cursor res = myDb.getAllData();
-        if (res.getCount() == 0) {
-            Toast.makeText(getActivity(),"yeet",Toast.LENGTH_LONG).show();
-            //return ;
-        }
-        StringBuffer buffer = new StringBuffer();
+//        if (res.getCount() == 0) {
+//            Toast.makeText(getActivity(),"yeet",Toast.LENGTH_LONG).show();
+//            //return ;
+//        }
+//        StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()) {
 
-            String VolLijn=res.getString(3)+"             "+res.getString(1);
+            String VolLijn=res.getString(3)+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+res.getString(1);
             arrayList.add(VolLijn);
             adapter.notifyDataSetChanged();
                     }
