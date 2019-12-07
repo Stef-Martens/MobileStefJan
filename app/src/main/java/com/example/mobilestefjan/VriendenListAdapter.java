@@ -1,26 +1,19 @@
 package com.example.mobilestefjan;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
-import java.util.List;
 
-public class TransactieListAdapter extends BaseAdapter {
-
+public class VriendenListAdapter extends BaseAdapter {
     Context context;
-    ArrayList<Transacties> arrayList;
+    ArrayList<Vrienden> arrayList;
 
-    public TransactieListAdapter(Context context, ArrayList<Transacties> arrayList){
+    public VriendenListAdapter(Context context, ArrayList<Vrienden> arrayList){
         this.context=context;
         this.arrayList=arrayList;
     }
@@ -39,16 +32,14 @@ public class TransactieListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView=inflater.inflate(R.layout.transactieadapter_view_layout,null);
-        TextView txtOmschrijving= convertView.findViewById(R.id.txtOmschr);
-        TextView txtBedrag= convertView.findViewById(R.id.txtBedr);
-        TextView txtDatum= convertView.findViewById(R.id.txtDat);
+        convertView=inflater.inflate(R.layout.vriendenadapter_view_layout,null);
+        TextView txtVolNaam= convertView.findViewById(R.id.txtVolNaam);
+        TextView txtGeld= convertView.findViewById(R.id.txtGeld);
 
-        Transacties transacties=arrayList.get(position);
+        Vrienden vrienden=arrayList.get(position);
 
-        txtOmschrijving.setText(transacties.getOmschrijving());
-        txtBedrag.setText(transacties.getBedrag());
-        txtDatum.setText(transacties.getDatum());
+        txtVolNaam.setText(vrienden.getAchternaam()+" "+vrienden.getVoornaam());
+        txtGeld.setText("+ "+vrienden.getGeld()+" EUR");
 
 
 
@@ -61,3 +52,5 @@ public class TransactieListAdapter extends BaseAdapter {
         return this.arrayList.size();
     }
 }
+
+

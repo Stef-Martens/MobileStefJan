@@ -24,8 +24,8 @@ public class FriendsFragment extends Fragment {
 
 
     ListView lv;
-    ArrayList<String> arrayList;
-    ArrayAdapter<String> adapter;
+    ArrayList<Vrienden> arrayList;
+    VriendenListAdapter adapter;
     Button bt;
     EditText etAchternaam;
     EditText etVoornaam;
@@ -47,12 +47,13 @@ public class FriendsFragment extends Fragment {
         etVoornaam=view.findViewById(R.id.txtVoornaam);
         lv=view.findViewById(R.id.listFriends);
         arrayList=new ArrayList<>();
-        adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayList);
+        VriendenListAdapter adapter=new VriendenListAdapter(getActivity(),arrayList);
+
+        //adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayList);
         lv.setAdapter(adapter);
         myDb=new DatabankVrienden(getActivity());
         VorigeDataToevoegen();
         AddData();
-        //onVriendToevoegen();
         vriendVerwijderen();
         return  view;
     }
@@ -75,7 +76,8 @@ public class FriendsFragment extends Fragment {
                             Toast.makeText(getActivity(),"Data not Inserted",Toast.LENGTH_LONG).show();
 
                         String VolLijn=etAchternaam.getText().toString()+" "+etVoornaam.getText().toString()+"            "+geld;
-                        arrayList.add(VolLijn);
+                        Vrienden vriend=new Vrienden(etAchternaam.getText().toString(),etVoornaam.getText().toString(),geld);
+                        arrayList.add(vriend);
                         adapter.notifyDataSetChanged();
                     }
                 }
@@ -84,38 +86,37 @@ public class FriendsFragment extends Fragment {
 
 
 
-    public void onVriendToevoegen(){
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String achternaam=etAchternaam.getText().toString();
-                String voornaam=etVoornaam.getText().toString();
-                String VolledigeNaam=voornaam+" "+achternaam;
-                arrayList.add(VolledigeNaam);
-                adapter.notifyDataSetChanged();
-            }
-
-        });
-    }
 
     public void VorigeDataToevoegen(){
 
-        Cursor res = myDb.getAllData();
+        arrayList=myDb.getAllDAta();
+        adapter=new VriendenListAdapter(getActivity(),arrayList);
+        lv.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+
+
+
+//        Cursor res = myDb.getAllData();
 //        if (res.getCount() == 0) {
 //            Toast.makeText(getActivity(),"yeet",Toast.LENGTH_LONG).show();
 //            //return ;
 //        }
-        StringBuffer buffer = new StringBuffer();
-        while (res.moveToNext()) {
 
-            String VolLijn=res.getString(2)+" "+res.getString(1)+"            "+res.getString(3);
-            arrayList.add(VolLijn);
-            adapter.notifyDataSetChanged();
+
+//        StringBuffer buffer = new StringBuffer();
+//        while (res.moveToNext()) {
+//
+//            String VolLijn=res.getString(2)+" "+res.getString(1)+"            "+res.getString(3);
+//            arrayList.add(VolLijn);
+//            adapter.notifyDataSetChanged();
+
+
 //            buffer.append("Id :" + res.getString(0) + "\n");
 //            buffer.append("Name :" + res.getString(1) + "\n");
 //            buffer.append("Surname :" + res.getString(2) + "\n");
 //            buffer.append("Marks :" + res.getString(3) + "\n\n");
-        }
+
 
         // Show all data
 //        showMessage("Data", buffer.toString());
@@ -131,7 +132,7 @@ public class FriendsFragment extends Fragment {
                 final int which_item=positie;
 
                 myDb.getWritableDatabase();
-                final Cursor res = (Cursor) myDb.getAllData();
+                final Cursor res = (Cursor) myDb.getAllDataCursor();
                 res.moveToPosition(which_item);
 
                 new AlertDialog.Builder(getActivity())

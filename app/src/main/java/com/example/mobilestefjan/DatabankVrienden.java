@@ -48,12 +48,30 @@ public class DatabankVrienden extends SQLiteOpenHelper {
             return true;
     }
 
-    public Cursor getAllData() {
+    public Cursor getAllDataCursor() {
         SQLiteDatabase db = this.getWritableDatabase();
         //db.execSQL("DROP TABLE "+TABLE_NAME);
         //onCreate(db);
         Cursor res = db.rawQuery("select * from "+TABLE_NAME,null);
         return res;
+    }
+
+    public ArrayList<Vrienden> getAllDAta(){
+        ArrayList<Vrienden> arrayList=new ArrayList<>();
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor res=db.rawQuery("SELECT * FROM "+TABLE_NAME,null);
+
+        while(res.moveToNext()){
+            String Achternaam=res.getString(1);
+            String Voornaam=res.getString(2);
+            String Geld=res.getString(3);
+
+
+            Vrienden vrienden=new Vrienden(Achternaam,Voornaam,Geld);
+
+            arrayList.add(vrienden);
+        }
+        return arrayList;
     }
 
     public boolean updateData(String id,String achternaam,String voornaam,String geld) {
