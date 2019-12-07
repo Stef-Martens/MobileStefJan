@@ -29,8 +29,8 @@ public class HistoryFragment extends Fragment {
 
     DatabankTransacties myDb;
     ListView lv;
-    ArrayList<String> arrayList;
-    ArrayAdapter<String> adapter;
+    ArrayList<Transacties> arrayList;
+    TransactieListAdapter adapter;
 
 
     @Override
@@ -41,8 +41,10 @@ public class HistoryFragment extends Fragment {
         myDb=new DatabankTransacties(getActivity());
         lv=view.findViewById(R.id.listTransacties);
         arrayList=new ArrayList<>();
-        adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayList);
-        lv.setAdapter(adapter);
+
+        TransactieListAdapter adapter=new TransactieListAdapter(getActivity(),arrayList);
+
+        //adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayList);
         AddData();
         ItemKlik();
         return view;
@@ -58,9 +60,9 @@ public class HistoryFragment extends Fragment {
 
                 final int which_item=positie;
                 myDb.getWritableDatabase();
-                Cursor res = (Cursor) myDb.getAllData();
+                Cursor res = (Cursor) myDb.getAllDataCursor();
                 res.moveToPosition(positie);
-                byte[] data = res.getBlob(4);
+                //byte[] data = res.getBlob(4);
                 //ByteArrayInputStream imageStream = new ByteArrayInputStream(data);
                 //Bitmap theImage = BitmapFactory.decodeStream(imageStream);
                 //ImageView image= new ImageView(getActivity());
@@ -91,18 +93,24 @@ public class HistoryFragment extends Fragment {
     }
 
     public  void AddData() {
-        Cursor res = myDb.getAllData();
+
+    arrayList=myDb.getAllDAta();
+    adapter=new TransactieListAdapter(getActivity(),arrayList);
+        lv.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+//        Cursor res = myDb.getAllData();
 //        if (res.getCount() == 0) {
 //            Toast.makeText(getActivity(),"yeet",Toast.LENGTH_LONG).show();
 //            //return ;
 //        }
 //        StringBuffer buffer = new StringBuffer();
-        while (res.moveToNext()) {
-
-            String VolLijn=res.getString(3)+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+res.getString(1);
-            arrayList.add(VolLijn);
-            adapter.notifyDataSetChanged();
-                    }
+//        while (res.moveToNext()) {
+//
+//            String VolLijn=res.getString(3)+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+res.getString(1);
+//            arrayList.add(VolLijn);
+//            adapter.notifyDataSetChanged();
+//                    }
     }
 
 }

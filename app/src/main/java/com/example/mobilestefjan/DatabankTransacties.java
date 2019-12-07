@@ -7,9 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
+import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -28,7 +32,7 @@ public class DatabankTransacties extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,BEDRAG INTEGER,DATUM STRING,OMSCHRIJVING TEXT, FOTO BLOB)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,BEDRAG INTEGER,DATUM STRING,OMSCHRIJVING TEXT, FOTO BYTE)");
     }
 
     @Override
@@ -65,12 +69,31 @@ public class DatabankTransacties extends SQLiteOpenHelper {
             return true;
     }
 
-    public Cursor getAllData() {
+    public Cursor getAllDataCursor() {
         SQLiteDatabase db = this.getWritableDatabase();
         ///db.execSQL("DROP TABLE "+TABLE_NAME);
         //onCreate(db);
         Cursor res = db.rawQuery("select * from "+TABLE_NAME,null);
         return res;
+    }
+
+    public ArrayList<Transacties> getAllDAta(){
+        ArrayList<Transacties> arrayList=new ArrayList<>();
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor res=db.rawQuery("SELECT * FROM "+TABLE_NAME,null);
+
+        while(res.moveToNext()){
+            String omschrijving=res.getString(3);
+            String Bedrag=res.getString(1);
+            String Datum=res.getString(2);
+            byte[] foto = res.getBlob(4);
+
+
+            Transacties transacties=new Transacties(omschrijving,Bedrag,Datum, foto);
+
+            arrayList.add(transacties);
+        }
+        return arrayList;
     }
 
     public boolean updateData(String id,String achternaam,String voornaam,String geld) {
