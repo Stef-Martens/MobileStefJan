@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -29,6 +31,9 @@ public class LenenFragment extends Fragment {
     Button btnOpslaan;
     Button btnAnnuleren;
     List<String> vrienden;
+    RadioGroup radioGroup;
+    RadioButton radioButton;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,8 +46,9 @@ public class LenenFragment extends Fragment {
         etBedrag=view.findViewById(R.id.txtBedrag);
         etDatum=view.findViewById(R.id.txtDatum);
         btnAnnuleren=view.findViewById(R.id.btnAnnuleren);
-        btnOpslaan=view.findViewById(R.id.btnOpslaan);
+        btnOpslaan=view.findViewById(R.id.btnOpslaanLening);
         ddlvrienden=view.findViewById(R.id.ddlVrienden);
+        radioGroup = view.findViewById(R.id.radiogroup);
         vrienden= myDb.krijgAlleVriendenIndll();
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, vrienden);
@@ -50,7 +56,7 @@ public class LenenFragment extends Fragment {
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ddlvrienden.setAdapter(dataAdapter);
 
-
+        Opslaan();
         Annuleren();
         return view;
     }
@@ -64,6 +70,29 @@ public class LenenFragment extends Fragment {
             }
         });
     }
+
+    public void Opslaan(){
+        btnOpslaan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String voornaam=ddlvrienden.getSelectedItem().toString();
+                int id=ddlvrienden.getSelectedItemPosition();
+                Cursor res= myDb.KrijgVriend(voornaam);
+                //res.moveToPosition(id);
+                String achternaam=res.getString(1);
+                int bedrag=Integer.parseInt(etBedrag.getText().toString());
+                int vorigBedrag=Integer.parseInt(res.getString(3));
+                int nieuwBedrag=vorigBedrag+bedrag;
+                String nieuwGeld= String.valueOf(nieuwBedrag);
+
+                Boolean update=myDb.updateData(id,achternaam,voornaam,nieuwGeld);
+
+                replaceFragment(new HomeFragment());
+            }
+        });
+    }
+
 
     public void replaceFragment(Fragment someFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

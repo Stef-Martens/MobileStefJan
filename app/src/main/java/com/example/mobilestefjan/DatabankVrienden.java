@@ -74,14 +74,14 @@ public class DatabankVrienden extends SQLiteOpenHelper {
         return arrayList;
     }
 
-    public boolean updateData(String id,String achternaam,String voornaam,String geld) {
+    public boolean updateData(Integer id,String achternaam,String voornaam,String geld) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1,id);
         contentValues.put(COL_2,achternaam);
         contentValues.put(COL_3,voornaam);
         contentValues.put(COL_4,geld);
-        db.update(TABLE_NAME, contentValues, "ID = ?",new String[] { id });
+        db.update(TABLE_NAME, contentValues, "VOORNAAM = ?",new String[]{String.valueOf(voornaam)});
         return true;
     }
 
@@ -89,6 +89,14 @@ public class DatabankVrienden extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "ID = ?",new String[] {id});
 
+    }
+
+    public Cursor KrijgVriend(String Voornaam){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c=db.rawQuery("SELECT * FROM "+TABLE_NAME+" where VOORNAAM=?", new String [] {Voornaam});
+        c.moveToFirst();
+
+        return c;
     }
 
     public List<String> krijgAlleVriendenIndll() {
