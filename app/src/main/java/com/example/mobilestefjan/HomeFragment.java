@@ -15,8 +15,6 @@ public class HomeFragment extends Fragment {
 
     CardView btnBetaling, btnOntvangen, btnLenen, btnUitlenen;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_home, container, false);
@@ -46,6 +44,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     public void VeranderNaarLenen(){
         btnLenen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,5 +66,4 @@ public class HomeFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 }

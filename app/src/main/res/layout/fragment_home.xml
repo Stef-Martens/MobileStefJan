@@ -121,8 +121,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-
-
         <!--Rij 2-->
         <!--Column 1-->
         <androidx.cardview.widget.CardView
@@ -204,9 +202,6 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
-
     </GridLayout>
-
 </LinearLayout>
