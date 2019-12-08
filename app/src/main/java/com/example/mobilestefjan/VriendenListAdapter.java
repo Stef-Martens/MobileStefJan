@@ -39,7 +39,14 @@ public class VriendenListAdapter extends BaseAdapter {
         Vrienden vrienden=arrayList.get(position);
 
         txtVolNaam.setText(vrienden.getAchternaam()+" "+vrienden.getVoornaam());
-        txtGeld.setText("+ "+vrienden.getGeld()+" EUR");
+        String geld=vrienden.getGeld();
+        int geldinint=Integer.parseInt(geld);
+        if(geldinint>=0){
+            txtGeld.setText("+ "+vrienden.getGeld()+" EUR");
+        }
+        else{
+            txtGeld.setText(vrienden.getGeld()+" EUR");
+        }
 
 
 

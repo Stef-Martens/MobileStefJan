@@ -2,6 +2,7 @@ package com.example.mobilestefjan;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -83,7 +85,18 @@ public class LenenFragment extends Fragment {
                 String achternaam=res.getString(1);
                 int bedrag=Integer.parseInt(etBedrag.getText().toString());
                 int vorigBedrag=Integer.parseInt(res.getString(3));
-                int nieuwBedrag=vorigBedrag+bedrag;
+                radioButton=checkRadio(getView());
+                int nieuwBedrag=0;
+                String textRadio=radioButton.getText().toString();
+                Toast.makeText(getActivity(),textRadio,Toast.LENGTH_SHORT).show();
+                if(textRadio!="Uitlenen"){
+                    nieuwBedrag=vorigBedrag-bedrag;
+                }
+                else{
+                    nieuwBedrag=vorigBedrag+bedrag;
+                }
+
+
                 String nieuwGeld= String.valueOf(nieuwBedrag);
 
                 Boolean update=myDb.updateData(id,achternaam,voornaam,nieuwGeld);
@@ -92,6 +105,12 @@ public class LenenFragment extends Fragment {
             }
         });
     }
+
+    public RadioButton checkRadio(View view){
+        int radioid=radioGroup.getCheckedRadioButtonId();
+        return radioButton=view.findViewById(radioid);
+    }
+
 
 
     public void replaceFragment(Fragment someFragment) {
