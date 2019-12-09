@@ -33,7 +33,7 @@ public class DatabankVoorJezelf extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertData(String achternaam, String voornaam, String saldo) {
+    public boolean insertData(Jezelf jezelf) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -46,9 +46,9 @@ public class DatabankVoorJezelf extends SQLiteOpenHelper {
         String sql = "INSERT INTO "+TABLE_NAME+" (achternaam,voornaam,saldo) VALUES(?,?,?)";
         SQLiteStatement insertStmt = db.compileStatement(sql);
         insertStmt.clearBindings();
-        insertStmt.bindString(1, achternaam);
-        insertStmt.bindString(2,voornaam);
-        insertStmt.bindString(3, saldo);
+        insertStmt.bindString(1, jezelf.getAchternaam());
+        insertStmt.bindString(2,jezelf.getVoornaam());
+        insertStmt.bindString(3, jezelf.getSaldo());
         insertStmt.executeInsert();
 
 
@@ -59,10 +59,24 @@ public class DatabankVoorJezelf extends SQLiteOpenHelper {
             return true;
     }
 
+
+
+    public boolean ifExists(Jezelf jezelf) {
+        // Check before adding item if item already exist
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c=db.rawQuery("SELECT * FROM "+TABLE_NAME+" where ACHTERNAAM=?", new String [] {jezelf.getAchternaam()});
+        boolean exist=false;
+        if((c.getCount() > 0)){
+            exist=true;
+        }
+        c.close();
+        return exist;
+
+    }
+
+
     public Cursor getAllDataCursor() {
         SQLiteDatabase db = this.getWritableDatabase();
-        ///db.execSQL("DROP TABLE "+TABLE_NAME);
-        //onCreate(db);
         Cursor res = db.rawQuery("select * from "+TABLE_NAME,null);
         return res;
     }
@@ -107,6 +121,13 @@ public class DatabankVoorJezelf extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "ACHTERNAAM = ?",new String[] {achternaam});
 
+    }
+
+
+    public void MaakOpnieuwDatabankAan(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE "+TABLE_NAME);
+        onCreate(db);
     }
 
 

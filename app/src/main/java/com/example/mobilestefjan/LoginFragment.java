@@ -30,6 +30,7 @@ public class LoginFragment extends Fragment {
         myDb=new DatabankVoorJezelf((getActivity()));
         etAchternaam=view.findViewById(R.id.txtlogAchternaam);
         etVoornaam=view.findViewById(R.id.txtlogVoornaam);
+        myDb.MaakOpnieuwDatabankAan();
 
         Login();
         Registreer();
@@ -66,7 +67,15 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                myDb.insertData(etAchternaam.getText().toString(),etVoornaam.getText().toString(),"0");
+                Jezelf jezelf=new Jezelf(etAchternaam.getText().toString(),etVoornaam.getText().toString(),"0");
+
+                    if(myDb.ifExists(jezelf)){
+                        Toast.makeText(getActivity(),"Deze gebruiker bestaat al",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                    myDb.insertData(jezelf);
+                    Toast.makeText(getActivity(),"Gebruiker toegevoegd",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

@@ -26,6 +26,7 @@ public class LenenFragment extends Fragment {
 
 
     DatabankVrienden myDb;
+    DatabankVoorJezelf mydbVoorJezelf;
     EditText etOmschrijving;
     EditText etBedrag;
     EditText etDatum;
@@ -44,6 +45,7 @@ public class LenenFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_lenen, container, false);
 
         myDb=new DatabankVrienden(getActivity());
+        mydbVoorJezelf=new DatabankVoorJezelf(getActivity());
 
 
         etOmschrijving=view.findViewById(R.id.txtOmschrijving);
@@ -93,11 +95,19 @@ public class LenenFragment extends Fragment {
                 int nieuwBedrag=0;
                 String textRadio=radioButtonGekozen.getText().toString();
                 Toast.makeText(getActivity(),textRadio,Toast.LENGTH_SHORT).show();
+                Cursor c=mydbVoorJezelf.getAllDataCursor();
+                c.moveToPosition(0);
                 if(radioButtonGekozen.getId()==r1.getId()){
                     nieuwBedrag=vorigBedrag-bedrag;
+
+                    int Saldo= Integer.valueOf(c.getString(2))+bedrag;
+                    mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo));
                 }
                 else{
                     nieuwBedrag=vorigBedrag+bedrag;
+
+                    int Saldo= Integer.valueOf(c.getString(2))-bedrag;
+                    mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo));
                 }
 
 

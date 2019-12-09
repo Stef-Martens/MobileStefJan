@@ -2,6 +2,7 @@ package com.example.mobilestefjan;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -47,13 +48,14 @@ public class TransactieFragment extends Fragment {
     RadioButton r2;
     private int mYear, mMonth, mDay;
     String datum;
+    DatabankVoorJezelf myDbJezelf;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_transactie, container, false);
 
         myDb=new DatabankTransacties(getActivity());
-
+        myDbJezelf=new DatabankVoorJezelf(getActivity());
 
         imageView=view.findViewById(R.id.imgTicket);
         btnFotoNemen=view.findViewById(R.id.btnFotoNemen);
@@ -123,11 +125,17 @@ public class TransactieFragment extends Fragment {
                     public void onClick(View v) {
                         String bedrag= etBedrag.getText().toString();
                         radioButtonGekozen=checkRadio(getView());
+                        Cursor c=myDbJezelf.getAllDataCursor();
+                        c.moveToPosition(0);
                         if(radioButtonGekozen.getId()==r2.getId()){
                             myDb.insertData("+ "+etBedrag.getText().toString(),datum,etOmschrijving.getText().toString(),bArray);
+                            int Saldo= Integer.valueOf(c.getString(2))+Integer.valueOf(bedrag);
+                            myDbJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo));
                         }
                         else{
                             myDb.insertData("- "+etBedrag.getText().toString(),datum,etOmschrijving.getText().toString(),bArray);
+                            int Saldo= Integer.valueOf(c.getString(2))-Integer.valueOf(bedrag);
+                            myDbJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo));
                         }
                         replaceFragment(new HomeFragment());
                     }
