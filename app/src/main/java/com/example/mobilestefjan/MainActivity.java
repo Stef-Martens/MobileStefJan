@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         //Volgende code is voor als je je device draait
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new HomeFragment()).commit();
+                    //new HomeFragment()).commit();
+                    new LoginFragment()).commit();
         }
     }
 

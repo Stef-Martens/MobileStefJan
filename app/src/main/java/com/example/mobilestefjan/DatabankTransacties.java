@@ -32,7 +32,7 @@ public class DatabankTransacties extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,BEDRAG INTEGER,DATUM STRING,OMSCHRIJVING TEXT, FOTO BYTE)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,BEDRAG STRING,DATUM STRING,OMSCHRIJVING TEXT, FOTO BYTE)");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DatabankTransacties extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertData(Integer bedrag, String datum, String omschrijving, byte[] foto) {
+    public boolean insertData(String bedrag, String datum, String omschrijving, byte[] foto) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -55,7 +55,7 @@ public class DatabankTransacties extends SQLiteOpenHelper {
         String sql = "INSERT INTO "+TABLE_NAME+" (bedrag,datum,omschrijving,foto) VALUES(?,?,?,?)";
         SQLiteStatement insertStmt = db.compileStatement(sql);
         insertStmt.clearBindings();
-        insertStmt.bindString(1, Integer.toString(bedrag));
+        insertStmt.bindString(1, bedrag);
         insertStmt.bindString(2,datum);
         insertStmt.bindString(3, omschrijving);
         insertStmt.bindBlob(4, foto);

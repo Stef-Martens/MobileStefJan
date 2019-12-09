@@ -34,7 +34,9 @@ public class LenenFragment extends Fragment {
     Button btnAnnuleren;
     List<String> vrienden;
     RadioGroup radioGroup;
-    RadioButton radioButton;
+    RadioButton radioButtonGekozen;
+    RadioButton r1;
+    RadioButton r2;
 
 
     @Override
@@ -51,6 +53,8 @@ public class LenenFragment extends Fragment {
         btnOpslaan=view.findViewById(R.id.btnOpslaanLening);
         ddlvrienden=view.findViewById(R.id.ddlVrienden);
         radioGroup = view.findViewById(R.id.radiogroup);
+        r1=view.findViewById(R.id.radioLenen);
+        r2=view.findViewById(R.id.radioUitlenen);
         vrienden= myDb.krijgAlleVriendenIndll();
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, vrienden);
@@ -85,11 +89,11 @@ public class LenenFragment extends Fragment {
                 String achternaam=res.getString(1);
                 int bedrag=Integer.parseInt(etBedrag.getText().toString());
                 int vorigBedrag=Integer.parseInt(res.getString(3));
-                radioButton=checkRadio(getView());
+                radioButtonGekozen =checkRadio(getView());
                 int nieuwBedrag=0;
-                String textRadio=radioButton.getText().toString();
+                String textRadio=radioButtonGekozen.getText().toString();
                 Toast.makeText(getActivity(),textRadio,Toast.LENGTH_SHORT).show();
-                if(textRadio!="Uitlenen"){
+                if(radioButtonGekozen.getId()==r1.getId()){
                     nieuwBedrag=vorigBedrag-bedrag;
                 }
                 else{
@@ -108,7 +112,7 @@ public class LenenFragment extends Fragment {
 
     public RadioButton checkRadio(View view){
         int radioid=radioGroup.getCheckedRadioButtonId();
-        return radioButton=view.findViewById(radioid);
+        return radioButtonGekozen=view.findViewById(radioid);
     }
 
 

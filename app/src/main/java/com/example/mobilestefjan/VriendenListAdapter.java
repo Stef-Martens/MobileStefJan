@@ -42,7 +42,7 @@ public class VriendenListAdapter extends BaseAdapter {
         String geld=vrienden.getGeld();
         int geldinint=Integer.parseInt(geld);
         if(geldinint>=0){
-            txtGeld.setText("+ "+vrienden.getGeld()+" EUR");
+            txtGeld.setText("+"+vrienden.getGeld()+" EUR");
         }
         else{
             txtGeld.setText(vrienden.getGeld()+" EUR");

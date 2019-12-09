@@ -84,7 +84,7 @@ public class HistoryFragment extends Fragment {
                         //.setIcon(android.R.drawable.ic_delete)
                         .setTitle(titel)
                         .setMessage("info transactie")
-                        .setMessage("Bedrag: "+res.getInt(1)+" EUR"+"\n"+"Datum: "+res.getString(2)+"\n"+"Foto: ")
+                        .setMessage("Bedrag: "+res.getString(1)+" EUR"+"\n"+"Datum: "+res.getString(2)+"\n"+"Foto: ")
                         .setPositiveButton("cancel", null)
                         .setView(image)
                         .show();
