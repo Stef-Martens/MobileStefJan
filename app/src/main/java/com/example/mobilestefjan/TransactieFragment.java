@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,7 @@ public class TransactieFragment extends Fragment {
         btnFotoNemen=view.findViewById(R.id.btnFotoNemen);
         etOmschrijving=view.findViewById(R.id.txtOmschrijving);
         etBedrag=view.findViewById(R.id.txtBedrag);
-        etDatum=view.findViewById(R.id.txtDatum);
+        //etDatum=view.findViewById(R.id.txtDatum);
         btnAnnuleren=view.findViewById(R.id.btnAnnuleren);
         btnOpslaan=view.findViewById(R.id.btnOpslaan);
         radioGroup=view.findViewById(R.id.radioTransactie);
@@ -123,21 +124,44 @@ public class TransactieFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String bedrag= etBedrag.getText().toString();
-                        radioButtonGekozen=checkRadio(getView());
-                        Cursor c=myDbJezelf.getAllDataCursor();
-                        c.moveToPosition(0);
-                        if(radioButtonGekozen.getId()==r2.getId()){
-                            myDb.insertData("+ "+etBedrag.getText().toString(),datum,etOmschrijving.getText().toString(),bArray);
-                            int Saldo= Integer.valueOf(c.getString(2))+Integer.valueOf(bedrag);
-                            myDbJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo),c.getString(3));
+
+                        try {
+                            if(TextUtils.isEmpty(etOmschrijving.getText().toString()))
+                            {
+                                etOmschrijving.setError("Mag niet leeg zijn");
+                            }
+                            else if(TextUtils.isEmpty(etBedrag.getText().toString()))
+                            {
+                                etBedrag.setError("Mag niet leeg zijn");
+                            }
+                            else if(TextUtils.isEmpty(datum))
+                            {
+                                btnKalender.setError("Mag niet leeg zijn");
+                            }
+                            else{
+                                String bedrag= etBedrag.getText().toString();
+                                radioButtonGekozen=checkRadio(getView());
+                                Cursor c=myDbJezelf.getAllDataCursor();
+                                c.moveToPosition(0);
+                                if(radioButtonGekozen.getId()==r2.getId()){
+                                    myDb.insertData("+ "+etBedrag.getText().toString(),datum,etOmschrijving.getText().toString(),bArray);
+                                    int Saldo= Integer.valueOf(c.getString(2))+Integer.valueOf(bedrag);
+                                    myDbJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo),c.getString(3));
+                                }
+                                else{
+                                    myDb.insertData("- "+etBedrag.getText().toString(),datum,etOmschrijving.getText().toString(),bArray);
+                                    int Saldo= Integer.valueOf(c.getString(2))-Integer.valueOf(bedrag);
+                                    myDbJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo),c.getString(3));
+                                }
+                                replaceFragment(new HomeFragment());
+                            }
                         }
-                        else{
-                            myDb.insertData("- "+etBedrag.getText().toString(),datum,etOmschrijving.getText().toString(),bArray);
-                            int Saldo= Integer.valueOf(c.getString(2))-Integer.valueOf(bedrag);
-                            myDbJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo),c.getString(3));
+                        catch (Exception e){
+                            btnFotoNemen.setError("Mag niet leeg zijn");
                         }
-                        replaceFragment(new HomeFragment());
+
+
+
                     }
                 }
         );

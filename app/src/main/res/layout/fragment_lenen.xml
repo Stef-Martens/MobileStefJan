@@ -46,20 +46,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txtDatum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/txtBedrag" />
-
-    <EditText
         android:id="@+id/txtBedrag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,19 +88,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
 
-
     <Spinner
         android:id="@+id/ddlVrienden"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="180dp"
         android:layout_marginLeft="180dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDatum" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnOpslaanLening"
@@ -141,28 +127,40 @@
         app:layout_constraintVertical_bias="0.522" />
 
     <RadioGroup
+        android:id="@+id/radiogroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toTopOf="@+id/btnOpslaan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/radiogroup"
-        app:layout_constraintTop_toBottomOf="@+id/ddlVrienden" >
+        app:layout_constraintTop_toBottomOf="@+id/ddlVrienden">
 
         <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lenen"
             android:id="@+id/radioLenen"
-            android:checked="true"/>
-
-        <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Uitlenen"
-            android:id="@+id/radioUitlenen"/>
+            android:checked="true"
+            android:text="Lenen" />
+
+        <RadioButton
+            android:id="@+id/radioUitlenen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uitlenen" />
 
     </RadioGroup>
+
+    <Button
+        android:id="@+id/btnKalenderLenen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginBottom="56dp"
+        android:text="Kalender openen"
+        app:layout_constraintBottom_toTopOf="@+id/ddlVrienden"
+        app:layout_constraintStart_toEndOf="@+id/textView6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,16 @@
 package com.example.mobilestefjan;
 
+import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -20,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class LenenFragment extends Fragment {
@@ -38,6 +42,9 @@ public class LenenFragment extends Fragment {
     RadioButton radioButtonGekozen;
     RadioButton r1;
     RadioButton r2;
+    Button btnKalender;
+    private int mYear, mMonth, mDay;
+    String Datum;
 
 
     @Override
@@ -50,7 +57,7 @@ public class LenenFragment extends Fragment {
 
         etOmschrijving=view.findViewById(R.id.txtOmschrijving);
         etBedrag=view.findViewById(R.id.txtBedrag);
-        etDatum=view.findViewById(R.id.txtDatum);
+        btnKalender=view.findViewById(R.id.btnKalenderLenen);
         btnAnnuleren=view.findViewById(R.id.btnAnnuleren);
         btnOpslaan=view.findViewById(R.id.btnOpslaanLening);
         ddlvrienden=view.findViewById(R.id.ddlVrienden);
@@ -64,6 +71,7 @@ public class LenenFragment extends Fragment {
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ddlvrienden.setAdapter(dataAdapter);
 
+        Kalender();
         Opslaan();
         Annuleren();
         return view;
@@ -84,38 +92,57 @@ public class LenenFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String voornaam=ddlvrienden.getSelectedItem().toString();
-                int id=ddlvrienden.getSelectedItemPosition();
-                Cursor res= myDb.KrijgVriend(voornaam);
-                //res.moveToPosition(id);
-                String achternaam=res.getString(1);
-                int bedrag=Integer.parseInt(etBedrag.getText().toString());
-                int vorigBedrag=Integer.parseInt(res.getString(3));
-                radioButtonGekozen =checkRadio(getView());
-                int nieuwBedrag=0;
-                String textRadio=radioButtonGekozen.getText().toString();
-                Toast.makeText(getActivity(),textRadio,Toast.LENGTH_SHORT).show();
-                Cursor c=mydbVoorJezelf.getAllDataCursor();
-                c.moveToPosition(0);
-                if(radioButtonGekozen.getId()==r1.getId()){
-                    nieuwBedrag=vorigBedrag-bedrag;
-
-                    int Saldo= Integer.valueOf(c.getString(2))+bedrag;
-                    mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo), c.getString(3));
+                if(TextUtils.isEmpty(etOmschrijving.getText().toString())){
+                    etOmschrijving.setError("Mag niet leeg zijn");
                 }
-                else{
-                    nieuwBedrag=vorigBedrag+bedrag;
-
-                    int Saldo= Integer.valueOf(c.getString(2))-bedrag;
-                    mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo), c.getString(3));
+                else if(TextUtils.isEmpty(etBedrag.getText().toString())){
+                    etBedrag.setError("Mag niet leeg zijn");
+                }
+                else  if(TextUtils.isEmpty(Datum)){
+                    btnKalender.setError("Mag niet leeg zijn");
                 }
 
+                try {
+                    String voornaam=ddlvrienden.getSelectedItem().toString();
+                    int id=ddlvrienden.getSelectedItemPosition();
+                    Cursor res= myDb.KrijgVriend(voornaam);
+                    //res.moveToPosition(id);
+                    String achternaam=res.getString(1);
+                    int bedrag=Integer.parseInt(etBedrag.getText().toString());
+                    int vorigBedrag=Integer.parseInt(res.getString(3));
+                    radioButtonGekozen =checkRadio(getView());
+                    int nieuwBedrag=0;
+                    String textRadio=radioButtonGekozen.getText().toString();
+                    Toast.makeText(getActivity(),textRadio,Toast.LENGTH_SHORT).show();
+                    Cursor c=mydbVoorJezelf.getAllDataCursor();
+                    c.moveToPosition(0);
+                    if(radioButtonGekozen.getId()==r1.getId()){
+                        nieuwBedrag=vorigBedrag-bedrag;
 
-                String nieuwGeld= String.valueOf(nieuwBedrag);
+                        int Saldo= Integer.valueOf(c.getString(2))+bedrag;
+                        mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo), c.getString(3));
+                    }
+                    else{
+                        nieuwBedrag=vorigBedrag+bedrag;
 
-                Boolean update=myDb.updateData(id,achternaam,voornaam,nieuwGeld);
+                        int Saldo= Integer.valueOf(c.getString(2))-bedrag;
+                        mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo), c.getString(3));
+                    }
 
-                replaceFragment(new HomeFragment());
+                    String nieuwGeld= String.valueOf(nieuwBedrag);
+
+                    Boolean update=myDb.updateData(id,achternaam,voornaam,nieuwGeld);
+
+                    replaceFragment(new HomeFragment());
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity(),"Voeg eerst een vriend toe",Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
+
             }
         });
     }
@@ -133,5 +160,35 @@ public class LenenFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    public void Kalender(){
+        btnKalender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get Current Date
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+
+                                Datum=dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+
+                            }
+                        }, mYear, mMonth, mDay);
+
+                datePickerDialog.show();
+
+            }
+        });
+    }
+
 
 }
