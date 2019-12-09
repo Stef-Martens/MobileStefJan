@@ -130,12 +130,12 @@ public class TransactieFragment extends Fragment {
                         if(radioButtonGekozen.getId()==r2.getId()){
                             myDb.insertData("+ "+etBedrag.getText().toString(),datum,etOmschrijving.getText().toString(),bArray);
                             int Saldo= Integer.valueOf(c.getString(2))+Integer.valueOf(bedrag);
-                            myDbJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo));
+                            myDbJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo),c.getString(3));
                         }
                         else{
                             myDb.insertData("- "+etBedrag.getText().toString(),datum,etOmschrijving.getText().toString(),bArray);
                             int Saldo= Integer.valueOf(c.getString(2))-Integer.valueOf(bedrag);
-                            myDbJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo));
+                            myDbJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo),c.getString(3));
                         }
                         replaceFragment(new HomeFragment());
                     }

@@ -101,13 +101,13 @@ public class LenenFragment extends Fragment {
                     nieuwBedrag=vorigBedrag-bedrag;
 
                     int Saldo= Integer.valueOf(c.getString(2))+bedrag;
-                    mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo));
+                    mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo), c.getString(3));
                 }
                 else{
                     nieuwBedrag=vorigBedrag+bedrag;
 
                     int Saldo= Integer.valueOf(c.getString(2))-bedrag;
-                    mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo));
+                    mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo), c.getString(3));
                 }
 
 

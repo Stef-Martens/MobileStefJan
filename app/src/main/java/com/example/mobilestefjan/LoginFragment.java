@@ -19,7 +19,7 @@ public class LoginFragment extends Fragment {
 
     Button btnLogin, btnRegistreer;
     DatabankVoorJezelf myDb;
-    EditText etAchternaam, etVoornaam;
+    EditText etAchternaam, etWachtwoord;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,8 +29,8 @@ public class LoginFragment extends Fragment {
         btnRegistreer=view.findViewById(R.id.btnRegistreer);
         myDb=new DatabankVoorJezelf((getActivity()));
         etAchternaam=view.findViewById(R.id.txtlogAchternaam);
-        etVoornaam=view.findViewById(R.id.txtlogVoornaam);
-        myDb.MaakOpnieuwDatabankAan();
+        etWachtwoord=view.findViewById(R.id.txtWachtwoord);
+        //myDb.MaakOpnieuwDatabankAan();
 
         Login();
         Registreer();
@@ -39,12 +39,12 @@ public class LoginFragment extends Fragment {
     }
 
 
-    public void Login(){
+    private void Login(){
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Cursor res= myDb.KrijgEigenGegevens(etVoornaam.getText().toString());
+                Cursor res= myDb.KrijgEigenGegevens(etAchternaam.getText().toString(),etWachtwoord.getText().toString());
 
 
                 try{
@@ -62,20 +62,14 @@ public class LoginFragment extends Fragment {
         });
     }
 
-    public void Registreer(){
+    private void Registreer(){
         btnRegistreer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Jezelf jezelf=new Jezelf(etAchternaam.getText().toString(),etVoornaam.getText().toString(),"0");
+            replaceFragment(new RegistratieFragment());
 
-                    if(myDb.ifExists(jezelf)){
-                        Toast.makeText(getActivity(),"Deze gebruiker bestaat al",Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                    myDb.insertData(jezelf);
-                    Toast.makeText(getActivity(),"Gebruiker toegevoegd",Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
     }

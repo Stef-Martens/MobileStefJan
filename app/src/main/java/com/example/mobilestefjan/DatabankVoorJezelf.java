@@ -16,6 +16,7 @@ public class DatabankVoorJezelf extends SQLiteOpenHelper {
     public static final String COL_1 = "ACHTERNAAM";
     public static final String COL_2 = "VOORNAAM";
     public static final String COL_3 = "SALDO";
+    public static final String COL_4 = "WACHTWOORD";
 
     public DatabankVoorJezelf(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -23,7 +24,7 @@ public class DatabankVoorJezelf extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ACHTERNAAM STRING,VOORNAAM STRING,SALDO STRING)");
+        db.execSQL("create table " + TABLE_NAME +" (ACHTERNAAM STRING,VOORNAAM STRING,SALDO STRING, WACHTWOORD STRING)");
     }
 
     @Override
@@ -43,12 +44,13 @@ public class DatabankVoorJezelf extends SQLiteOpenHelper {
 //        contentValues.put(COL_5,foto);
 
 
-        String sql = "INSERT INTO "+TABLE_NAME+" (achternaam,voornaam,saldo) VALUES(?,?,?)";
+        String sql = "INSERT INTO "+TABLE_NAME+" (achternaam,voornaam,saldo, wachtwoord) VALUES(?,?,?,?)";
         SQLiteStatement insertStmt = db.compileStatement(sql);
         insertStmt.clearBindings();
         insertStmt.bindString(1, jezelf.getAchternaam());
         insertStmt.bindString(2,jezelf.getVoornaam());
         insertStmt.bindString(3, jezelf.getSaldo());
+        insertStmt.bindString(4, jezelf.getWachtwoord());
         insertStmt.executeInsert();
 
 
@@ -90,38 +92,40 @@ public class DatabankVoorJezelf extends SQLiteOpenHelper {
             String achternaam=res.getString(0);
             String voornaam=res.getString(1);
             String saldo=res.getString(2);
+            String wachtwoord=res.getString(3);
 
 
-            Jezelf jezelf=new Jezelf(achternaam,voornaam,saldo);
+            Jezelf jezelf=new Jezelf(achternaam,voornaam,saldo, wachtwoord);
 
             arrayList.add(jezelf);
         }
         return arrayList;
     }
 
-    public Cursor KrijgEigenGegevens(String Voornaam){
+    public Cursor KrijgEigenGegevens(String Achternaam, String Wachtwoord){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c=db.rawQuery("SELECT * FROM "+TABLE_NAME+" where VOORNAAM=?", new String [] {Voornaam});
+        Cursor c=db.rawQuery("SELECT * FROM "+TABLE_NAME+" where ACHTERNAAM=? AND WACHTWOORD=?", new String [] {Achternaam, Wachtwoord});
         c.moveToFirst();
 
         return c;
     }
 
-    public boolean updateData(String achternaam,String voornaam,String saldo) {
+    public boolean updateData(String achternaam,String voornaam,String saldo, String wachtwoord) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1,achternaam);
         contentValues.put(COL_2,voornaam);
         contentValues.put(COL_3,saldo);
-        db.update(TABLE_NAME, contentValues, "ACHTERNAAM = ?",new String[] { achternaam });
+        contentValues.put(COL_4,wachtwoord);
+        db.update(TABLE_NAME, contentValues, "ACHTERNAAM = ? and WACHTWOORD=?",new String[] { achternaam, wachtwoord });
         return true;
     }
 
-    public Integer deleteData (String achternaam) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "ACHTERNAAM = ?",new String[] {achternaam});
-
-    }
+//    public Integer deleteData (String achternaam) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        return db.delete(TABLE_NAME, "ACHTERNAAM = ?",new String[] {achternaam});
+//
+//    }
 
 
     public void MaakOpnieuwDatabankAan(){

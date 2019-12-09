@@ -1,12 +1,21 @@
 package com.example.mobilestefjan;
 
 public class Jezelf {
-    String Achternaam, Voornaam, Saldo;
+    String Achternaam, Voornaam, Saldo, Wachtwoord;
 
-    public Jezelf(String achternaam, String voornaam, String saldo) {
+    public String getWachtwoord() {
+        return Wachtwoord;
+    }
+
+    public void setWachtwoord(String wachtwoord) {
+        Wachtwoord = wachtwoord;
+    }
+
+    public Jezelf(String achternaam, String voornaam, String saldo, String wachtwoord) {
         Achternaam = achternaam;
         Voornaam = voornaam;
         Saldo = saldo;
+        Wachtwoord = wachtwoord;
     }
 
     public Jezelf(){}
