@@ -39,10 +39,13 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-            BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-            bottomNav.setOnNavigationItemSelectedListener(navListener);
+
 
             //Fragment currFrag= getSupportFragmentManager().findFragmentByTag("fragmentTag");
+
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+
 
 
 
@@ -52,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
                     //new HomeFragment()).commit();
                     new LoginFragment()).commit();
         }
+
+//        Fragment fragment=getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+//        if(fragment.getContext()==new LoginFragment()){
+//            bottomNav.setVisibility(View.INVISIBLE);
+//            Toast.makeText(this,"huts",Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

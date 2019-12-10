@@ -1,6 +1,7 @@
 package com.example.mobilestefjan;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,11 +42,16 @@ public class VriendenListAdapter extends BaseAdapter {
         txtVolNaam.setText(vrienden.getAchternaam()+" "+vrienden.getVoornaam());
         String geld=vrienden.getGeld();
         int geldinint=Integer.parseInt(geld);
-        if(geldinint>=0){
+        if(geldinint>0){
             txtGeld.setText("+"+vrienden.getGeld()+" EUR");
+            txtGeld.setTextColor(Color.GREEN);
+        }
+        else if(geldinint<0){
+            txtGeld.setText(vrienden.getGeld()+" EUR");
+            txtGeld.setTextColor(Color.RED);
         }
         else{
-            txtGeld.setText(vrienden.getGeld()+" EUR");
+            txtGeld.setText("+"+vrienden.getGeld()+" EUR");
         }
 
 

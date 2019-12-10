@@ -41,6 +41,9 @@ public class HomeFragment extends Fragment {
         if(saldoInInt>=0){
             saldo.setText("+"+c.getString(2)+" EUR");
         }
+        else{
+            saldo.setText(c.getString(2)+" EUR");
+        }
 
 
         VeranderenNaarTransactie();

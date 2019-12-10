@@ -101,45 +101,44 @@ public class LenenFragment extends Fragment {
                 else  if(TextUtils.isEmpty(Datum)){
                     btnKalender.setError("Mag niet leeg zijn");
                 }
+                else {
 
-                try {
-                    String voornaam=ddlvrienden.getSelectedItem().toString();
-                    int id=ddlvrienden.getSelectedItemPosition();
-                    Cursor res= myDb.KrijgVriend(voornaam);
-                    //res.moveToPosition(id);
-                    String achternaam=res.getString(1);
-                    int bedrag=Integer.parseInt(etBedrag.getText().toString());
-                    int vorigBedrag=Integer.parseInt(res.getString(3));
-                    radioButtonGekozen =checkRadio(getView());
-                    int nieuwBedrag=0;
-                    String textRadio=radioButtonGekozen.getText().toString();
-                    Toast.makeText(getActivity(),textRadio,Toast.LENGTH_SHORT).show();
-                    Cursor c=mydbVoorJezelf.getAllDataCursor();
-                    c.moveToPosition(0);
-                    if(radioButtonGekozen.getId()==r1.getId()){
-                        nieuwBedrag=vorigBedrag-bedrag;
+                    try {
+                        String voornaam = ddlvrienden.getSelectedItem().toString();
+                        int id = ddlvrienden.getSelectedItemPosition();
+                        Cursor res = myDb.KrijgVriend(voornaam);
+                        //res.moveToPosition(id);
+                        String achternaam = res.getString(1);
+                        int bedrag = Integer.parseInt(etBedrag.getText().toString());
+                        int vorigBedrag = Integer.parseInt(res.getString(3));
+                        radioButtonGekozen = checkRadio(getView());
+                        int nieuwBedrag = 0;
+                        String textRadio = radioButtonGekozen.getText().toString();
+                        Toast.makeText(getActivity(), textRadio, Toast.LENGTH_SHORT).show();
+                        Cursor c = mydbVoorJezelf.getAllDataCursor();
+                        c.moveToPosition(0);
+                        if (radioButtonGekozen.getId() == r1.getId()) {
+                            nieuwBedrag = vorigBedrag - bedrag;
 
-                        int Saldo= Integer.valueOf(c.getString(2))+bedrag;
-                        mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo), c.getString(3));
+                            int Saldo = Integer.valueOf(c.getString(2)) + bedrag;
+                            mydbVoorJezelf.updateData(c.getString(0), c.getString(1), String.valueOf(Saldo), c.getString(3));
+                        } else {
+                            nieuwBedrag = vorigBedrag + bedrag;
+
+                            int Saldo = Integer.valueOf(c.getString(2)) - bedrag;
+                            mydbVoorJezelf.updateData(c.getString(0), c.getString(1), String.valueOf(Saldo), c.getString(3));
+                        }
+
+                        String nieuwGeld = String.valueOf(nieuwBedrag);
+
+                        Boolean update = myDb.updateData(id, achternaam, voornaam, nieuwGeld);
+
+                        replaceFragment(new HomeFragment());
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(), "Voeg eerst een vriend toe", Toast.LENGTH_SHORT).show();
                     }
-                    else{
-                        nieuwBedrag=vorigBedrag+bedrag;
 
-                        int Saldo= Integer.valueOf(c.getString(2))-bedrag;
-                        mydbVoorJezelf.updateData(c.getString(0),c.getString(1),String.valueOf(Saldo), c.getString(3));
-                    }
-
-                    String nieuwGeld= String.valueOf(nieuwBedrag);
-
-                    Boolean update=myDb.updateData(id,achternaam,voornaam,nieuwGeld);
-
-                    replaceFragment(new HomeFragment());
                 }
-                catch (Exception e){
-                    Toast.makeText(getActivity(),"Voeg eerst een vriend toe",Toast.LENGTH_SHORT).show();
-                }
-
-
 
 
 
