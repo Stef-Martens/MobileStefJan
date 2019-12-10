@@ -1,6 +1,7 @@
 package com.example.mobilestefjan;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,10 @@ public class TransactieListAdapter extends BaseAdapter {
         Transacties transacties=arrayList.get(position);
 
         txtOmschrijving.setText(transacties.getOmschrijving());
+        String bedrag=transacties.getBedrag();
+        char eersteTeken=bedrag.charAt(0);
+        if(eersteTeken=='-')    txtBedrag.setTextColor(Color.RED);
+        else txtBedrag.setTextColor(Color.GREEN);
         txtBedrag.setText(transacties.getBedrag());
         txtDatum.setText(transacties.getDatum());
 
