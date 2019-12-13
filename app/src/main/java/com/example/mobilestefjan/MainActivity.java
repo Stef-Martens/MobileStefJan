@@ -1,6 +1,7 @@
 package com.example.mobilestefjan;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -46,14 +47,15 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new HomeFragment()).commit();
 
 
         //Volgende code is voor als je je app start
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     //new HomeFragment()).commit();
-                    new LoginFragment()).commit();
+                    new HomeFragment()).commit();
         }
 
 //        Fragment fragment=getSupportFragmentManager().findFragmentById(R.id.fragment_container);
