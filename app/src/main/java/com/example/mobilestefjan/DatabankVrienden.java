@@ -81,7 +81,7 @@ public class DatabankVrienden extends SQLiteOpenHelper {
         contentValues.put(COL_2,achternaam);
         contentValues.put(COL_3,voornaam);
         contentValues.put(COL_4,geld);
-        db.update(TABLE_NAME, contentValues, "VOORNAAM = ?",new String[]{String.valueOf(voornaam)});
+        db.update(TABLE_NAME, contentValues, "ACHTERNAAM = ? and VOORNAAM=?",new String[] { achternaam, voornaam });
         return true;
     }
 

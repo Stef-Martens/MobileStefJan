@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 
@@ -30,6 +33,8 @@ public class FriendsFragment extends Fragment {
     EditText etAchternaam;
     EditText etVoornaam;
     DatabankVrienden myDb;
+    String GeldVereffenen;
+    DatabankVoorJezelf myDbVoorJezelf;
 
 
     public FriendsFragment(){
@@ -52,10 +57,80 @@ public class FriendsFragment extends Fragment {
         //adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayList);
         lv.setAdapter(adapter);
         myDb=new DatabankVrienden(getActivity());
+        myDbVoorJezelf = new DatabankVoorJezelf(getActivity());
         VorigeDataToevoegen();
         AddData();
         vriendVerwijderen();
+        ItemKlik();
         return  view;
+    }
+
+    public void ItemKlik() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final int which_item=position;
+                myDb.getWritableDatabase();
+                myDbVoorJezelf.getWritableDatabase();
+                final Cursor res = (Cursor) myDb.getAllDataCursor();
+                final Cursor c=(Cursor) myDbVoorJezelf.getAllDataCursor();
+                res.moveToPosition(position);
+                c.moveToPosition(0);
+                String geld=res.getString(3);
+                char eersteTeken=geld.charAt(0);
+
+                final EditText input = new EditText(getActivity());
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+
+
+                if(eersteTeken!='-' && Integer.valueOf(geld)!=0){
+                    new AlertDialog.Builder(getActivity())
+                            //.setIcon(android.R.drawable.ic_delete)
+                            .setTitle("Geld vereffenen")
+                            .setMessage("Hoeveel geld heeft "+res.getString(2)+" je terugbetaald?")
+                            .setNegativeButton("cancel", null)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    GeldVereffenen=input.getText().toString();
+                                    int Saldo = Integer.valueOf(res.getString(3)) - Integer.valueOf(GeldVereffenen);
+                                    myDb.updateData(res.getInt(0), res.getString(1), res.getString(2), String.valueOf(Saldo));
+                                    int Geld=Integer.valueOf(c.getString(2)) + Integer.valueOf(GeldVereffenen);
+                                    myDbVoorJezelf.updateData(c.getString(0), c.getString(1),String.valueOf( Geld) ,c.getString(3));
+                                    replaceFragment(new FriendsFragment());
+                                }
+                            })
+                            .setView(input)
+                            .show();
+                }
+                else if (eersteTeken=='-'){
+                    new AlertDialog.Builder(getActivity())
+                            //.setIcon(android.R.drawable.ic_delete)
+                            .setTitle("Geld vereffenen")
+                            .setMessage("Hoeveel heb je aan "+res.getString(2)+" terugbetaald?")
+                            .setNegativeButton("cancel", null)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    GeldVereffenen=input.getText().toString();
+                                    int Saldo = Integer.valueOf(res.getString(3)) + Integer.valueOf(GeldVereffenen);
+
+                                    myDb.updateData(res.getInt(0), res.getString(1), res.getString(2), String.valueOf(Saldo));
+
+                                    int Geld=Integer.valueOf(c.getString(2)) - Integer.valueOf(GeldVereffenen);
+                                    myDbVoorJezelf.updateData(c.getString(0), c.getString(1),String.valueOf( Geld) ,c.getString(3));
+                                    replaceFragment(new FriendsFragment());
+                                }
+                            })
+                            .setView(input)
+                            .show();
+                }
+                else{
+                    Toast.makeText(getActivity(),"Er is geen lening te vereffenen",Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
     }
 
 
@@ -94,32 +169,6 @@ public class FriendsFragment extends Fragment {
         lv.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-
-
-
-//        Cursor res = myDb.getAllData();
-//        if (res.getCount() == 0) {
-//            Toast.makeText(getActivity(),"yeet",Toast.LENGTH_LONG).show();
-//            //return ;
-//        }
-
-
-//        StringBuffer buffer = new StringBuffer();
-//        while (res.moveToNext()) {
-//
-//            String VolLijn=res.getString(2)+" "+res.getString(1)+"            "+res.getString(3);
-//            arrayList.add(VolLijn);
-//            adapter.notifyDataSetChanged();
-
-
-//            buffer.append("Id :" + res.getString(0) + "\n");
-//            buffer.append("Name :" + res.getString(1) + "\n");
-//            buffer.append("Surname :" + res.getString(2) + "\n");
-//            buffer.append("Marks :" + res.getString(3) + "\n\n");
-
-
-        // Show all data
-//        showMessage("Data", buffer.toString());
     }
 
 
@@ -155,6 +204,13 @@ public class FriendsFragment extends Fragment {
                 return true;
             }
         });
+    }
+
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }
