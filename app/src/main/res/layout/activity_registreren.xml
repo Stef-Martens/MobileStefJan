@@ -1,6 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:alpha="0.9"
+    android:background="@drawable/achtergrond">
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="60dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:src="@drawable/coins"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtVoornaamBijRegistratie"
+        android:hint="@string/voornaam"
+        android:inputType="textPersonName"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingTop="5dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:background="#0B521B"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        tools:layout_editor_absoluteX="20dp"
+        />
+
+    <EditText
+        android:id="@+id/txtAchternaamBijRegistratie"
+        android:textSize="20sp"
+        android:inputType="textPersonName"
+        android:hint="@string/achternaam"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingTop="5dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:background="#0B521B"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/txtVoornaamBijRegistratie"
+        tools:layout_editor_absoluteX="20dp"
+        />
+
+    <EditText
+        android:id="@+id/txtWachtwoordBijRegistratie"
+        android:layout_width="match_parent"
+        android:inputType="textPassword"
+        android:layout_height="50dp"
+        android:hint="@string/wachtwoord"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingTop="5dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:background="#0B521B"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/txtAchternaamBijRegistratie"
+        tools:layout_editor_absoluteX="20dp"
+        />
+
+    <Button
+        android:id="@+id/btnRegistratie"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:text="@string/registreren"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnAnnulatie"
+        app:layout_constraintTop_toBottomOf="@+id/txtWachtwoordBijRegistratie" />
+
+    <Button
+        android:id="@+id/btnAnnulatie"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="40dp"
+        android:text="@string/annuleren"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtWachtwoordBijRegistratie" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
