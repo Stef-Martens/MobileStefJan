@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -141,19 +142,32 @@ public class FriendsFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String geld="0";
-                        boolean isInserted = myDb.insertData(etAchternaam.getText().toString(),
-                                etVoornaam.getText().toString(),
-                                 geld);
-                        if(isInserted == true)
-                            Toast.makeText(getActivity(),"Data Inserted",Toast.LENGTH_LONG).show();
-                        else
-                            Toast.makeText(getActivity(),"Data not Inserted",Toast.LENGTH_LONG).show();
+                        if(TextUtils.isEmpty(etAchternaam.getText().toString()))
+                        {
+                            etAchternaam.setError("Mag niet leeg zijn");
+                        }
+                        else if(TextUtils.isEmpty(etVoornaam.getText().toString()))
+                        {
+                            etVoornaam.setError("Mag niet leeg zijn");
+                        }
+                        else{
+                            if(myDb.ifExists(etAchternaam.getText().toString(),etVoornaam.getText().toString())){
+                                Toast.makeText(getActivity(),"Deze vriend bestaat al",Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                String geld="0";
+                                boolean isInserted = myDb.insertData(etAchternaam.getText().toString(),
+                                        etVoornaam.getText().toString(),
+                                        geld);
+                                if(isInserted == true)
+                                    Toast.makeText(getActivity(),"Vriend toegevoegd",Toast.LENGTH_LONG).show();
 
-                        String VolLijn=etAchternaam.getText().toString()+" "+etVoornaam.getText().toString()+"            "+geld;
-                        Vrienden vriend=new Vrienden(etAchternaam.getText().toString(),etVoornaam.getText().toString(),geld);
-                        arrayList.add(vriend);
-                        adapter.notifyDataSetChanged();
+                                String VolLijn=etAchternaam.getText().toString()+" "+etVoornaam.getText().toString()+"            "+geld;
+                                Vrienden vriend=new Vrienden(etAchternaam.getText().toString(),etVoornaam.getText().toString(),geld);
+                                arrayList.add(vriend);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
                     }
                 }
         );

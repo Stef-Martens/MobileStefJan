@@ -85,10 +85,29 @@ public class DatabankVrienden extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean ifExists(String achternaam, String voornaam) {
+        // Check before adding item if item already exist
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c=db.rawQuery("SELECT * FROM "+TABLE_NAME+" where ACHTERNAAM=? and VOORNAAM=?", new String [] {achternaam, voornaam});
+        boolean exist=false;
+        if((c.getCount() > 0)){
+            exist=true;
+        }
+        c.close();
+        return exist;
+
+    }
+
     public Integer deleteData (String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "ID = ?",new String[] {id});
 
+    }
+
+    public void MaakOpnieuwDatabankAan(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE "+TABLE_NAME);
+        onCreate(db);
     }
 
     public Cursor KrijgVriend(String Voornaam){

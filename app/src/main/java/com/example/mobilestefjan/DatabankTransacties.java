@@ -113,5 +113,11 @@ public class DatabankTransacties extends SQLiteOpenHelper {
 
     }
 
+    public void MaakOpnieuwDatabankAan(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE "+TABLE_NAME);
+        onCreate(db);
+    }
+
 
 }
