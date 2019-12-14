@@ -40,11 +40,11 @@
 
     <EditText
         android:id="@+id/txtAchternaamBijRegistratie"
-        android:textSize="20sp"
         android:inputType="textPersonName"
         android:hint="achternaam"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:textSize="20sp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -64,6 +64,7 @@
         android:layout_height="50dp"
         android:hint="wachtwoord"
         android:layout_marginTop="30dp"
+        android:textSize="20sp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:paddingTop="5dp"
@@ -79,6 +80,7 @@
         android:id="@+id/btnRegistratie"
         android:layout_width="150dp"
         android:layout_height="60dp"
+        android:textSize="18sp"
         android:text="registreren"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,6 +89,7 @@
 
     <Button
         android:id="@+id/btnAnnulatie"
+        android:textSize="18sp"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginLeft="40dp"

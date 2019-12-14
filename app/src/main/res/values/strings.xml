@@ -10,8 +10,8 @@
     <string name="betalen">BETALEN</string>
     <string name="lenen">LENEN</string>
     <string name="voornaam">voornaam</string>
-    <string name="achternaam">achternaam</string>
     <string name="registreren">Registreren</string>
     <string name="annuleren">Annuleren</string>
     <string name="wachtwoord">wachtwoord</string>
+    <string name="achternaam">achternaam</string>
 </resources>
