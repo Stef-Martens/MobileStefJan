@@ -14,4 +14,13 @@
     <string name="registreren">Registreren</string>
     <string name="annuleren">Annuleren</string>
     <string name="wachtwoord">wachtwoord</string>
+    <string name="title1">Welkom</string>
+    <string name="title2">Beheer je in- en uitgaven</string>
+    <string name="title3">Leen van vrienden</string>
+    <string name="description1">Welkom op onze app! Dit is een budgeting app om al je financiële zaken in bij te houden.</string>
+    <string name="description2">Hou al je transacties bij in deze app. Je kan zelf je saldo aanpassen door te betalen of door ontvangen!</string>
+    <string name="description3">Je kan zelf vrienden toevoegen! Vanaf nu kan je geld lenen of uitlenen zonder dit te vergeten te vereffenen!</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="done">Done</string>
 </resources>

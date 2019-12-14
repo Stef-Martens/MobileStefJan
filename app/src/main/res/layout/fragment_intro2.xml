@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Intro1Fragment"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/colorPrimary">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/slide_two_img" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title2"
+        android:textSize="26sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/lato_regular"/>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/description2"
+        android:layout_marginTop="30sp"
+
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/lato_light"
+        android:layout_gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/EersteBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/back"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/lato_light"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="bottom|start"
+            android:gravity="bottom|start"
+            />
+
+        <TextView
+            android:id="@+id/TweedeNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/next"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/lato_light"
+            android:layout_gravity="bottom|end"
+            android:gravity="bottom|end"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
