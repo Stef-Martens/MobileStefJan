@@ -155,15 +155,14 @@ public class FriendsFragment extends Fragment {
                                 Toast.makeText(getActivity(),"Deze vriend bestaat al",Toast.LENGTH_SHORT).show();
                             }
                             else{
+                                String achternaam=etAchternaam.getText().toString().substring(0,1).toUpperCase() + etAchternaam.getText().toString().substring(1);
+                                String voornaam=etVoornaam.getText().toString().substring(0,1).toUpperCase() + etVoornaam.getText().toString().substring(1);
                                 String geld="0";
-                                boolean isInserted = myDb.insertData(etAchternaam.getText().toString(),
-                                        etVoornaam.getText().toString(),
-                                        geld);
+                                boolean isInserted = myDb.insertData(achternaam, voornaam, geld);
                                 if(isInserted == true)
                                     Toast.makeText(getActivity(),"Vriend toegevoegd",Toast.LENGTH_LONG).show();
 
-                                String VolLijn=etAchternaam.getText().toString()+" "+etVoornaam.getText().toString()+"            "+geld;
-                                Vrienden vriend=new Vrienden(etAchternaam.getText().toString(),etVoornaam.getText().toString(),geld);
+                                Vrienden vriend=new Vrienden(achternaam,voornaam,geld);
                                 arrayList.add(vriend);
                                 adapter.notifyDataSetChanged();
                             }

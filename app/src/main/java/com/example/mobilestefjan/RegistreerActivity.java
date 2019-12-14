@@ -115,7 +115,10 @@ public class RegistreerActivity extends AppCompatActivity {
 
 
     public void JezelfToevoegen(){
-        Jezelf jezelf=new Jezelf(etAchternaam.getText().toString(),etVoornaam.getText().toString(),"0", etWachtwoord.getText().toString());
+        String achternaam=etAchternaam.getText().toString().substring(0,1).toUpperCase() + etAchternaam.getText().toString().substring(1);
+        String voornaam=etVoornaam.getText().toString().substring(0,1).toUpperCase() + etVoornaam.getText().toString().substring(1);
+
+        Jezelf jezelf=new Jezelf(achternaam,voornaam,"0", etWachtwoord.getText().toString());
         myDb.MaakOpnieuwDatabankAan();
         DatabankVrienden myDbVrienden;
         myDbVrienden=new DatabankVrienden(this);
