@@ -39,15 +39,24 @@
     <string name="transacties">TRANSACTIES</string>
     <string name="opslaan">opslaan</string>
 
-
+    <!-- friends fragment -->
     <string name="vriend">vriend</string>
+    <string name="achternaam_van_vriend">achternaam van vriend</string>
+    <string name="voornaam_van_vriend">voornaam van vriend</string>
+
+    <!-- lenen en uitlenen fragment -->
     <string name="kies_hier_wat_u_met_het_bedrag_wilt_doen">kies hier wat u met het bedrag wilt doen:</string>
     <string name="kalender_openen">Kalender openen</string>
     <string name="datum">datum</string>
     <string name="bedrag">bedrag</string>
+
+    <!-- transactie fragment -->
     <string name="omschrijving">omschrijving</string>
-    <string name="achternaam_van_vriend">achternaam van vriend</string>
-    <string name="voornaam_van_vriend">voornaam van vriend</string>
+    <string name="foto_nemen">foto nemen</string>
+    <string name="ticket">ticket</string>
+    <string name="ontvangentransactie">ontvangen</string>
+    <string name="betalentransactie">betalen</string>
+    <string name="fotobijbetaling">FotoBijBetaling</string>
 
 
 </resources>
