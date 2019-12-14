@@ -5,11 +5,7 @@
 
     <string name="foto">foto</string>
 
-    <!-- login en registreren-->
-    <string name="voornaam">voornaam</string>
-    <string name="registreren">registreren</string>
-    <string name="annuleren">annuleren</string>
-    <string name="wachtwoord">wachtwoord</string>
+    <!-- Intro   -->
     <string name="title1">Welkom</string>
     <string name="title2">Beheer je in- en uitgaven</string>
     <string name="title3">Leen van vrienden</string>
@@ -19,6 +15,12 @@
     <string name="next">Next</string>
     <string name="back">Back</string>
     <string name="done">Done</string>
+
+    <!-- login en registreren-->
+    <string name="voornaam">voornaam</string>
+    <string name="registreren">registreren</string>
+    <string name="annuleren">annuleren</string>
+    <string name="wachtwoord">wachtwoord</string>
     <string name="achternaam">achternaam</string>
     <string name="login">login</string>
 
