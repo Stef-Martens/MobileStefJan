@@ -2,17 +2,13 @@
     <string name="app_name">MobileStefJan</string>
     <string name="action_settings">Settings</string>
     <string name="Saldo">(hier komt saldo)</string>
-    <string name="vriend_verwijderen">Vriend Verwijderen</string>
-    <string name="vriend_toevoegen">Vriend toevoegen</string>
-    <string name="ontvangen">INNEN</string>
-    <string name="uitlenen">UITLENEN</string>
+
     <string name="foto">foto</string>
-    <string name="betalen">BETALEN</string>
-    <string name="lenen">LENEN</string>
+
+    <!-- login en registreren-->
     <string name="voornaam">voornaam</string>
-    <string name="achternaam">achternaam</string>
-    <string name="registreren">Registreren</string>
-    <string name="annuleren">Annuleren</string>
+    <string name="registreren">registreren</string>
+    <string name="annuleren">annuleren</string>
     <string name="wachtwoord">wachtwoord</string>
     <string name="title1">Welkom</string>
     <string name="title2">Beheer je in- en uitgaven</string>
@@ -23,4 +19,17 @@
     <string name="next">Next</string>
     <string name="back">Back</string>
     <string name="done">Done</string>
+    <string name="achternaam">achternaam</string>
+    <string name="login">login</string>
+
+    <!-- homescherm -->
+    <string name="betalen">BETALEN</string>
+    <string name="lenen">LENEN</string>
+    <string name="ontvangen">INNEN</string>
+    <string name="uitlenen">UITLENEN</string>
+
+    <!-- friends fragment -->
+    <string name="vriend_verwijderen">Vriend Verwijderen</string>
+    <string name="vriend_toevoegen">Vriend toevoegen</string>
+
 </resources>

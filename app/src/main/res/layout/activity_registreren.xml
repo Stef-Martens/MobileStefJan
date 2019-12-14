@@ -40,11 +40,11 @@
 
     <EditText
         android:id="@+id/txtAchternaamBijRegistratie"
-        android:textSize="20sp"
         android:inputType="textPersonName"
         android:hint="achternaam"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:textSize="20sp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -64,6 +64,7 @@
         android:layout_height="50dp"
         android:hint="wachtwoord"
         android:layout_marginTop="30dp"
+        android:textSize="20sp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:paddingTop="5dp"
@@ -79,7 +80,8 @@
         android:id="@+id/btnRegistratie"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:text="registreren"
+        android:textSize="18sp"
+        android:text="@string/registreren"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnAnnulatie"
@@ -87,10 +89,12 @@
 
     <Button
         android:id="@+id/btnAnnulatie"
+        android:textSize="18sp"
         android:layout_width="150dp"
         android:layout_height="60dp"
+        android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:text="annuleren"
+        android:text="@string/annuleren"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtWachtwoordBijRegistratie" />
