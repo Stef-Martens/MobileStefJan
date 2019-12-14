@@ -17,22 +17,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
+        android:layout_height="100dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:backgroundTint="#0C631E"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/listTransacties"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/txtTransacties"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/cardview_light_background"
-            android:layout_marginLeft="20sp"
-            android:text="Transacties"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:text="@string/transacties"
             android:textSize="30sp" />
     </FrameLayout>
 

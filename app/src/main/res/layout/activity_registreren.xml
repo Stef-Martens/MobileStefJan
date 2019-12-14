@@ -11,7 +11,7 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="60dp"
+        android:paddingTop="90dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:src="@drawable/coins"
@@ -21,7 +21,7 @@
 
     <EditText
         android:id="@+id/txtVoornaamBijRegistratie"
-        android:hint="voornaam"
+        android:hint="@string/voornaam"
         android:inputType="textPersonName"
         android:textSize="20sp"
         android:layout_width="match_parent"
@@ -34,6 +34,7 @@
         android:textColorHint="@android:color/white"
         android:background="#0B521B"
         android:gravity="center"
+        app:fontFamily="@font/lato_regular"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:layout_editor_absoluteX="20dp"
         />
@@ -41,7 +42,7 @@
     <EditText
         android:id="@+id/txtAchternaamBijRegistratie"
         android:inputType="textPersonName"
-        android:hint="achternaam"
+        android:hint="@string/achternaam"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="20sp"
@@ -53,6 +54,7 @@
         android:textColorHint="@android:color/white"
         android:background="#0B521B"
         android:gravity="center"
+        app:fontFamily="@font/lato_regular"
         app:layout_constraintTop_toBottomOf="@+id/txtVoornaamBijRegistratie"
         tools:layout_editor_absoluteX="20dp"
         />
@@ -62,7 +64,7 @@
         android:layout_width="match_parent"
         android:inputType="textPassword"
         android:layout_height="50dp"
-        android:hint="wachtwoord"
+        android:hint="@string/wachtwoord"
         android:layout_marginTop="30dp"
         android:textSize="20sp"
         android:layout_marginLeft="20dp"
@@ -72,9 +74,9 @@
         android:textColorHint="@android:color/white"
         android:background="#0B521B"
         android:gravity="center"
+        app:fontFamily="@font/lato_regular"
         app:layout_constraintTop_toBottomOf="@+id/txtAchternaamBijRegistratie"
-        tools:layout_editor_absoluteX="20dp"
-        />
+        tools:layout_editor_absoluteX="20dp"/>
 
     <Button
         android:id="@+id/btnRegistratie"
@@ -82,6 +84,7 @@
         android:layout_height="60dp"
         android:textSize="18sp"
         android:text="@string/registreren"
+        app:fontFamily="@font/lato_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnAnnulatie"
@@ -95,6 +98,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:text="@string/annuleren"
+        app:fontFamily="@font/lato_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtWachtwoordBijRegistratie" />

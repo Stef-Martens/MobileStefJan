@@ -4,7 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/colorPrimary">
+
+    <EditText
+        android:id="@+id/txtAchternaamaam"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:ems="10"
+        android:hint="@string/achternaam_van_vriend"
+        android:inputType="textPersonName"
+        app:fontFamily="@font/lato_regular"
+        app:layout_constraintBottom_toTopOf="@+id/VriendToevoegen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.244" />
 
     <EditText
         android:id="@+id/txtVoornaam"
@@ -15,8 +34,9 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:ems="10"
-        android:hint="Voornaam van vriend"
+        android:hint="@string/voornaam_van_vriend"
         android:inputType="textPersonName"
+        app:fontFamily="@font/lato_regular"
         app:layout_constraintBottom_toTopOf="@+id/VriendToevoegen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -35,34 +55,17 @@
         android:layout_marginRight="10dp"
         android:onClick="VriendToevoegen"
         android:text="@string/vriend_toevoegen"
+        app:fontFamily="@font/lato_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/txtAchternaamaam"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:ems="10"
-        android:hint="Achternaam van vriend"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/VriendToevoegen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.244" />
-
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linearLayoutCompat"
         android:layout_width="380dp"
         android:layout_height="380dp"
-        android:fontFamily="sans-serif"
+        app:fontFamily="@font/lato_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

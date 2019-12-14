@@ -33,5 +33,21 @@
     <!-- friends fragment -->
     <string name="vriend_verwijderen">Vriend Verwijderen</string>
     <string name="vriend_toevoegen">Vriend toevoegen</string>
+    <string name="wachtwoord_hint">wachtwoord_hint</string>
+
+    <!-- history fragment -->
+    <string name="transacties">TRANSACTIES</string>
+    <string name="opslaan">opslaan</string>
+
+
+    <string name="vriend">vriend</string>
+    <string name="kies_hier_wat_u_met_het_bedrag_wilt_doen">kies hier wat u met het bedrag wilt doen:</string>
+    <string name="kalender_openen">Kalender openen</string>
+    <string name="datum">datum</string>
+    <string name="bedrag">bedrag</string>
+    <string name="omschrijving">omschrijving</string>
+    <string name="achternaam_van_vriend">achternaam van vriend</string>
+    <string name="voornaam_van_vriend">voornaam van vriend</string>
+
 
 </resources>
