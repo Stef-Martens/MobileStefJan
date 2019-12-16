@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textView3"
@@ -14,7 +13,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="44dp"
         android:text="@string/omschrijving"
-        android:textSize="25sp"
+        android:textSize="23sp"
         app:fontFamily="@font/lato_regular"
         app:layout_constraintEnd_toStartOf="@+id/txtOmschrijving"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +21,7 @@
 
     <EditText
         android:id="@+id/txtOmschrijving"
-        android:layout_width="wrap_content"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
@@ -51,7 +50,7 @@
     <EditText
         android:id="@+id/txtBedrag"
         android:hint="@string/bedrag"
-        android:layout_width="wrap_content"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
@@ -123,6 +122,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnFotoNemen"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/kies_hier_wat_u_met_het_bedrag_wilt_doen"
+        android:textSize="20sp"
+        app:fontFamily="@font/lato_regular"
+        app:layout_constraintBottom_toTopOf="@+id/radioTransactie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgTicket" />
 
     <RadioGroup
         android:layout_width="wrap_content"

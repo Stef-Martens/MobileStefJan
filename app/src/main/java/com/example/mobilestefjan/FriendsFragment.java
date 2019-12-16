@@ -89,7 +89,7 @@ public class FriendsFragment extends Fragment {
                     new AlertDialog.Builder(getActivity())
                             //.setIcon(android.R.drawable.ic_delete)
                             .setTitle("Geld vereffenen")
-                            .setMessage("Hoeveel geld heeft "+res.getString(2)+" je terugbetaald?")
+                            .setMessage("Hoeveel heeft "+res.getString(2)+" je terugbetaald?")
                             .setNegativeButton("cancel", null)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {

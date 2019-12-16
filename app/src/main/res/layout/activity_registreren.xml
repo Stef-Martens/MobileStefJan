@@ -82,7 +82,7 @@
         android:id="@+id/btnRegistratie"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:textSize="18sp"
+        android:textSize="17sp"
         android:text="@string/registreren"
         app:fontFamily="@font/lato_regular"
         app:layout_constraintBottom_toBottomOf="parent"
