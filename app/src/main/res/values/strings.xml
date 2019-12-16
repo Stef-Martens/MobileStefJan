@@ -58,5 +58,6 @@
     <string name="ontvangentransactie">ontvangen</string>
     <string name="betalentransactie">betalen</string>
     <string name="fotobijbetaling">FotoBijBetaling</string>
+    <string name="vrienden">VRIENDEN</string>
 
 </resources>
