@@ -60,4 +60,9 @@
     <string name="fotobijbetaling">FotoBijBetaling</string>
     <string name="vrienden">VRIENDEN</string>
 
+    <!-- fragment introvensters -->
+    <string name="afbeelding_intro_1">afbeelding_intro_1</string>
+    <string name="afbeelding_intro_2">afbeelding_intro_2</string>
+    <string name="afbeelding_intro_3">afbeelding_intro_3</string>
+
 </resources>

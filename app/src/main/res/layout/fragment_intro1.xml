@@ -9,14 +9,14 @@
     android:padding="16dp"
     android:background="@color/colorPrimary">
 
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:src="@drawable/slide_one_img" />
+        android:src="@drawable/slide_one_img"
+        android:contentDescription="@string/afbeelding_intro_1" />
 
     <TextView
         android:id="@+id/textView"
@@ -27,7 +27,7 @@
         android:textColor="@color/colorAccent"
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
-        android:fontFamily="@font/lato_regular"/>
+        app:fontFamily="@font/lato_regular"/>
 
     <TextView
         android:id="@+id/textView11"
@@ -37,7 +37,7 @@
         android:textSize="18sp"
         android:textColor="@color/white"
         android:layout_marginTop="30sp"
-        android:fontFamily="@font/lato_light"
+        app:fontFamily="@font/lato_light"
         android:layout_gravity="center"
         />
 
@@ -48,13 +48,13 @@
 
         <TextView
             android:id="@+id/EersteNext"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/next"
             android:textSize="20sp"
             android:textColor="@color/colorAccent"
-            android:fontFamily="@font/lato_light"
+            app:fontFamily="@font/lato_light"
             android:layout_gravity="bottom|end"
             android:gravity="bottom|end"
             android:clickable="true"
