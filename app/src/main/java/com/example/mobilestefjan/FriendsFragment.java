@@ -45,8 +45,6 @@ public class FriendsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
-
         View view= inflater.inflate(R.layout.fragment_friends, container, false);
         bt=view.findViewById(R.id.VriendToevoegen);
         etAchternaam=view.findViewById(R.id.txtAchternaamaam);
@@ -129,7 +127,6 @@ public class FriendsFragment extends Fragment {
                                     catch (Exception e){
                                         Toast.makeText(getContext(),"Ongeldig bedrag ingegeven",Toast.LENGTH_SHORT).show();
                                     }
-
                                 }
                             })
                             .setView(input)
@@ -138,13 +135,9 @@ public class FriendsFragment extends Fragment {
                 else{
                     Toast.makeText(getActivity(),"Er is geen lening te vereffenen",Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
     }
-
-
 
 
     public  void AddData() {
@@ -182,8 +175,6 @@ public class FriendsFragment extends Fragment {
                 }
         );
     }
-
-
 
 
     public void VorigeDataToevoegen(){
@@ -230,11 +221,11 @@ public class FriendsFragment extends Fragment {
         });
     }
 
+
     public void replaceFragment(Fragment someFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, someFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 }
