@@ -37,6 +37,7 @@ public class LenenFragment extends Fragment {
     Spinner ddlvrienden;
     Button btnOpslaan;
     Button btnAnnuleren;
+    Button btnVriendToevoegen;
     List<String> vrienden;
     RadioGroup radioGroup;
     RadioButton radioButtonGekozen;
@@ -55,13 +56,12 @@ public class LenenFragment extends Fragment {
         mydbVoorJezelf=new DatabankVoorJezelf(getActivity());
 
 
-        etOmschrijving=view.findViewById(R.id.txtOmschrijving);
         etBedrag=view.findViewById(R.id.txtBedrag);
-        btnKalender=view.findViewById(R.id.btnKalenderLenen);
         btnAnnuleren=view.findViewById(R.id.btnAnnuleren);
         btnOpslaan=view.findViewById(R.id.btnOpslaanLening);
         ddlvrienden=view.findViewById(R.id.ddlVrienden);
         radioGroup = view.findViewById(R.id.radiogroup);
+        btnVriendToevoegen=view.findViewById(R.id.btnVriendToevoegenLenen);
         r1=view.findViewById(R.id.radioLenen);
         r2=view.findViewById(R.id.radioUitlenen);
         vrienden= myDb.krijgAlleVriendenIndll();
@@ -71,7 +71,7 @@ public class LenenFragment extends Fragment {
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ddlvrienden.setAdapter(dataAdapter);
 
-        Kalender();
+        VriendToevoegen();
         Opslaan();
         Annuleren();
         return view;
@@ -87,19 +87,23 @@ public class LenenFragment extends Fragment {
         });
     }
 
+    private void VriendToevoegen(){
+        btnVriendToevoegen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new FriendsFragment());
+            }
+        });
+    }
+
     public void Opslaan(){
         btnOpslaan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(TextUtils.isEmpty(etOmschrijving.getText().toString())){
-                    etOmschrijving.setError("Mag niet leeg zijn");
-                }
-                else if(TextUtils.isEmpty(etBedrag.getText().toString())){
+
+                if(TextUtils.isEmpty(etBedrag.getText().toString())){
                     etBedrag.setError("Mag niet leeg zijn");
-                }
-                else  if(TextUtils.isEmpty(Datum)){
-                    btnKalender.setError("Mag niet leeg zijn");
                 }
                 else {
 
@@ -114,7 +118,6 @@ public class LenenFragment extends Fragment {
                         radioButtonGekozen = checkRadio(getView());
                         int nieuwBedrag = 0;
                         String textRadio = radioButtonGekozen.getText().toString();
-                        Toast.makeText(getActivity(), textRadio, Toast.LENGTH_SHORT).show();
                         Cursor c = mydbVoorJezelf.getAllDataCursor();
                         c.moveToPosition(0);
                         if (radioButtonGekozen.getId() == r1.getId()) {
@@ -124,7 +127,6 @@ public class LenenFragment extends Fragment {
                             mydbVoorJezelf.updateData(c.getString(0), c.getString(1), String.valueOf(Saldo), c.getString(3));
                         } else {
                             nieuwBedrag = vorigBedrag + bedrag;
-
                             int Saldo = Integer.valueOf(c.getString(2)) - bedrag;
                             mydbVoorJezelf.updateData(c.getString(0), c.getString(1), String.valueOf(Saldo), c.getString(3));
                         }
@@ -160,34 +162,6 @@ public class LenenFragment extends Fragment {
         transaction.commit();
     }
 
-    public void Kalender(){
-        btnKalender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Get Current Date
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
-                        new DatePickerDialog.OnDateSetListener() {
-
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-
-                                Datum=dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-
-                            }
-                        }, mYear, mMonth, mDay);
-
-                datePickerDialog.show();
-
-            }
-        });
-    }
 
 
 

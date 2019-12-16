@@ -7,47 +7,18 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        app:fontFamily="@font/lato_regular"
-        android:text="@string/omschrijving"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toStartOf="@+id/txtOmschrijving"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/txtOmschrijving"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:ems="10"
-        android:hint="@string/omschrijving"
-        android:inputType="textPersonName"
-        android:singleLine="true"
-        app:fontFamily="@font/lato_regular"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:autofillHints="@string/omschrijving"/>
-
-    <TextView
         android:id="@+id/textView9"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="44dp"
-        app:fontFamily="@font/lato_regular"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="100dp"
+        android:autofillHints="@string/bedrag"
         android:text="@string/bedrag"
         android:textSize="25sp"
-        app:layout_constraintEnd_toStartOf="@+id/txtBedrag"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:fontFamily="@font/lato_regular"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        android:autofillHints="@string/omschrijving"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtBedrag"
@@ -60,69 +31,46 @@
         android:inputType="number"
         app:fontFamily="@font/lato_regular"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:textSize="25sp"
-        android:text="@string/datum"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:fontFamily="@font/lato_regular"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-    <Button
-        android:id="@+id/btnKalenderLenen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginLeft="76dp"
-        android:text="@string/kalender_openen"
-        app:fontFamily="@font/lato_regular"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView6" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Spinner
         android:id="@+id/ddlVrienden"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
         app:fontFamily="@font/lato_regular"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnKalenderLenen" />
+        app:layout_constraintTop_toTopOf="@+id/textView12" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="224dp"
+        android:layout_marginRight="224dp"
         android:text="@string/vriend"
         android:textSize="25sp"
         app:fontFamily="@font/lato_regular"
+        app:layout_constraintEnd_toStartOf="@+id/ddlVrienden"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginBottom="248dp"
         android:text="@string/kies_hier_wat_u_met_het_bedrag_wilt_doen"
         android:textSize="20sp"
         app:fontFamily="@font/lato_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RadioGroup
         android:id="@+id/radiogroup"
@@ -173,5 +121,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radiogroup" />
+
+    <Button
+        android:id="@+id/btnVriendToevoegenLenen"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:text="Voeg een vriend toe"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ddlVrienden" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -93,12 +93,17 @@ public class FriendsFragment extends Fragment {
                             .setNegativeButton("cancel", null)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    GeldVereffenen=input.getText().toString();
-                                    int Saldo = Integer.valueOf(res.getString(3)) - Integer.valueOf(GeldVereffenen);
-                                    myDb.updateData(res.getInt(0), res.getString(1), res.getString(2), String.valueOf(Saldo));
-                                    int Geld=Integer.valueOf(c.getString(2)) + Integer.valueOf(GeldVereffenen);
-                                    myDbVoorJezelf.updateData(c.getString(0), c.getString(1),String.valueOf( Geld) ,c.getString(3));
-                                    replaceFragment(new FriendsFragment());
+                                    try {
+                                        GeldVereffenen = input.getText().toString();
+                                        int Saldo = Integer.valueOf(res.getString(3)) - Integer.valueOf(GeldVereffenen);
+                                        myDb.updateData(res.getInt(0), res.getString(1), res.getString(2), String.valueOf(Saldo));
+                                        int Geld = Integer.valueOf(c.getString(2)) + Integer.valueOf(GeldVereffenen);
+                                        myDbVoorJezelf.updateData(c.getString(0), c.getString(1), String.valueOf(Geld), c.getString(3));
+                                        replaceFragment(new FriendsFragment());
+                                    }
+                                    catch (Exception e){
+                                        Toast.makeText(getContext(),"Ongeldig bedrag ingegeven",Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             })
                             .setView(input)
@@ -112,14 +117,19 @@ public class FriendsFragment extends Fragment {
                             .setNegativeButton("cancel", null)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    GeldVereffenen=input.getText().toString();
-                                    int Saldo = Integer.valueOf(res.getString(3)) + Integer.valueOf(GeldVereffenen);
+                                    try{                                    GeldVereffenen=input.getText().toString();
+                                        int Saldo = Integer.valueOf(res.getString(3)) + Integer.valueOf(GeldVereffenen);
 
-                                    myDb.updateData(res.getInt(0), res.getString(1), res.getString(2), String.valueOf(Saldo));
+                                        myDb.updateData(res.getInt(0), res.getString(1), res.getString(2), String.valueOf(Saldo));
 
-                                    int Geld=Integer.valueOf(c.getString(2)) - Integer.valueOf(GeldVereffenen);
-                                    myDbVoorJezelf.updateData(c.getString(0), c.getString(1),String.valueOf( Geld) ,c.getString(3));
-                                    replaceFragment(new FriendsFragment());
+                                        int Geld=Integer.valueOf(c.getString(2)) - Integer.valueOf(GeldVereffenen);
+                                        myDbVoorJezelf.updateData(c.getString(0), c.getString(1),String.valueOf( Geld) ,c.getString(3));
+                                        replaceFragment(new FriendsFragment());
+                                    }
+                                    catch (Exception e){
+                                        Toast.makeText(getContext(),"Ongeldig bedrag ingegeven",Toast.LENGTH_SHORT).show();
+                                    }
+
                                 }
                             })
                             .setView(input)
@@ -151,12 +161,13 @@ public class FriendsFragment extends Fragment {
                             etVoornaam.setError("Mag niet leeg zijn");
                         }
                         else{
-                            if(myDb.ifExists(etAchternaam.getText().toString(),etVoornaam.getText().toString())){
+                            String achternaam=etAchternaam.getText().toString().substring(0,1).toUpperCase() + etAchternaam.getText().toString().substring(1);
+                            String voornaam=etVoornaam.getText().toString().substring(0,1).toUpperCase() + etVoornaam.getText().toString().substring(1);
+
+                            if(myDb.ifExists(achternaam,voornaam)){
                                 Toast.makeText(getActivity(),"Deze vriend bestaat al",Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                String achternaam=etAchternaam.getText().toString().substring(0,1).toUpperCase() + etAchternaam.getText().toString().substring(1);
-                                String voornaam=etVoornaam.getText().toString().substring(0,1).toUpperCase() + etVoornaam.getText().toString().substring(1);
                                 String geld="0";
                                 boolean isInserted = myDb.insertData(achternaam, voornaam, geld);
                                 if(isInserted == true)

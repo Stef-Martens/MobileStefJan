@@ -32,7 +32,6 @@ public class HistoryFragment extends Fragment {
     ArrayList<Transacties> arrayList;
     TransactieListAdapter adapter;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -41,6 +40,7 @@ public class HistoryFragment extends Fragment {
         myDb=new DatabankTransacties(getActivity());
         lv=view.findViewById(R.id.listTransacties);
         arrayList=new ArrayList<>();
+
 
         TransactieListAdapter adapter=new TransactieListAdapter(getActivity(),arrayList);
 
@@ -94,10 +94,12 @@ public class HistoryFragment extends Fragment {
 
     public  void AddData() {
 
-    arrayList=myDb.getAllDAta();
-    adapter=new TransactieListAdapter(getActivity(),arrayList);
+        arrayList = myDb.getAllDAta();
+        adapter = new TransactieListAdapter(getActivity(), arrayList);
         lv.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+
 
 //        Cursor res = myDb.getAllData();
 //        if (res.getCount() == 0) {
