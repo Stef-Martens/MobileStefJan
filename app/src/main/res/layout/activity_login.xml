@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:background="@drawable/achtergrond"
     android:layout_height="match_parent"
     android:tag="">
@@ -15,44 +16,47 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:src="@drawable/coins"
+        android:contentDescription="@string/logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/txtlogAchternaam"
         android:inputType="textPersonName"
         android:textSize="20sp"
-        android:hint="@string/achternaam"
-        android:layout_width="match_parent"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:background="#0B521B"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:paddingTop="5dp"
+        android:hint="@string/achternaam"
+        android:importantForAutofill="no"
+        android:layout_width="match_parent"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
-        android:background="#0B521B"
-        android:gravity="center"
         app:fontFamily="@font/lato_regular"
         app:layout_constraintTop_toBottomOf="@id/imageView"
         tools:layout_editor_absoluteX="20dp" />
 
     <EditText
         android:id="@+id/txtWachtwoord"
-        android:textSize="20sp"
-        android:hint="@string/wachtwoord"
         android:inputType="textPassword"
-        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:paddingTop="5dp"
+        android:gravity="center"
+        android:background="#0B521B"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:paddingTop="5dp"
+        android:hint="@string/wachtwoord"
+        android:importantForAutofill="no"
+        android:layout_width="match_parent"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
-        android:background="#0B521B"
-        android:gravity="center"
         app:fontFamily="@font/lato_regular"
         app:layout_constraintTop_toBottomOf="@id/txtlogAchternaam"
         tools:layout_editor_absoluteX="20dp" />
@@ -81,4 +85,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtWachtwoord" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

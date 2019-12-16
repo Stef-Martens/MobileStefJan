@@ -23,6 +23,7 @@
     <string name="wachtwoord">wachtwoord</string>
     <string name="achternaam">achternaam</string>
     <string name="login">login</string>
+    <string name="logo">logo</string>
 
     <!-- homescherm -->
     <string name="betalen">BETALEN</string>
@@ -57,6 +58,5 @@
     <string name="ontvangentransactie">ontvangen</string>
     <string name="betalentransactie">betalen</string>
     <string name="fotobijbetaling">FotoBijBetaling</string>
-
 
 </resources>
