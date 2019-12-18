@@ -43,7 +43,6 @@ public class LenenFragment extends Fragment {
     RadioButton radioButtonGekozen;
     RadioButton r1;
     RadioButton r2;
-    Button btnKalender;
     private int mYear, mMonth, mDay;
     String Datum;
 

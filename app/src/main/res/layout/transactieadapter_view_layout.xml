@@ -14,13 +14,13 @@
         android:textSize="20sp"
         android:layout_height="60dp"
         android:id="@+id/txtOmschr"
-        android:layout_weight="66.6"/>
+        android:layout_weight="45"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="33.3">
+        android:layout_weight="55">
 
         <TextView
             android:gravity="center"

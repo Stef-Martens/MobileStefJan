@@ -91,7 +91,7 @@ public class RegistreerActivity extends AppCompatActivity {
                                         JezelfToevoegen();
                                     }
                                 })
-                                .setNegativeButton("no", null)
+                                .setNegativeButton("nee", null)
                                 .show();
                     }
                 }
