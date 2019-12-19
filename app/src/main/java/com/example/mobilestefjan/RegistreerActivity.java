@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.regex.Pattern;
 
 
 public class RegistreerActivity extends AppCompatActivity {
@@ -73,6 +74,12 @@ public class RegistreerActivity extends AppCompatActivity {
                 {
                     etWachtwoord.setError("Mag niet leeg zijn");
                 }
+                else if(stringContainsNumber(etVoornaam.getText().toString())){
+                    etVoornaam.setError("Mag geen getallen bevatten");
+                }
+                else if(stringContainsNumber(etAchternaam.getText().toString())){
+                    etAchternaam.setError("Mag geen getallen bevatten");
+                }
                 else{
                     Jezelf jezelf=new Jezelf(etAchternaam.getText().toString(),etVoornaam.getText().toString(),"0", etWachtwoord.getText().toString());
 
@@ -129,5 +136,10 @@ public class RegistreerActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"Gebruiker toegevoegd",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         getApplicationContext().startActivity(intent);
+    }
+
+    public boolean stringContainsNumber( String s )
+    {
+        return Pattern.compile( "[0-9]" ).matcher( s ).find();
     }
 }
